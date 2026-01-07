@@ -1,0 +1,326 @@
+{
+  "products": [
+        {
+      "id": "1",
+      "year": 2025,
+      "collection": "Autumn - Winter",
+      "model": "Alessia",
+      "description": {
+        "typeColor": "Monocolor",
+        "colors": [
+          "Indigo"
+        ],
+        "type": "Quilted",
+        "dimension": "Medium",
+        "dimensionCm": "30 x 19 x 6",
+        "embroidery": "Fish bone",
+        "yarnType": "Cotton",
+        "buckle": true,
+        "closure": "Swivel/Magnetic closure",
+        "lining": true,
+        "handles": {
+          "type": "Shoulder bag",
+          "material": "Chain",
+          "color": "Gold",
+          "length": "Medium",
+          "rings": "Medium"
+        }
+      },
+      "price": 70,
+      "image": "https://raw.githubusercontent.com/AlessiaMonasteri/Computer-Engineering-and-AI-Anno2-Semestre1/main/images/Alessia.jpeg",
+      "stock": 1,
+      "available": true
+    },
+    {
+      "id": "2",
+      "year": 2025,
+      "collection": "Autumn - Winter",
+      "model": "Olga",
+      "description": {
+        "typeColor": "Bicolor",
+        "colors": [
+          "Coffee",
+          "White"
+        ],
+        "type": "Half-moon",
+        "dimension": "Medium",
+        "dimensionCm": "31 x 23 x 6",
+        "embroidery": "Alternate Stacks",
+        "yarnType": "Cotton",
+        "buckle": false,
+        "closure": "Zipper",
+        "lining": true,
+        "handles": {
+          "type": "Shoulder bag",
+          "material": "Chain",
+          "color": "Gold",
+          "length": "Medium",
+          "rings": "Medium"
+        }
+      },
+      "price": 70,
+      "image": "https://raw.githubusercontent.com/AlessiaMonasteri/Computer-Engineering-and-AI-Anno2-Semestre1/main/images/Olga.jpeg",
+      "stock": 1,
+      "available": true
+    },
+    {
+      "id": "3",
+      "year": 2025,
+      "collection": "Autumn - Winter",
+      "model": "Queen",
+      "description": {
+        "typeColor": "Bicolor",
+        "colors": [
+          "Black",
+          "Silver"
+        ],
+        "type": "Tote",
+        "dimension": "Large",
+        "dimensionCm": "40 x 26 x 10",
+        "embroidery": "Medium Squares - Diagonal Fill",
+        "yarnType": "Cotton",
+        "buckle": false,
+        "closure": "Zipper",
+        "lining": true,
+        "handles": {
+          "type": "Hand bag",
+          "material": "Cotton & Chain",
+          "color": "Black & Silver",
+          "length": "Small",
+          "rings": "Medium"
+        }
+      },
+      "price": 90,
+      "image": "https://raw.githubusercontent.com/AlessiaMonasteri/Computer-Engineering-and-AI-Anno2-Semestre1/main/images/Queen.jpeg",
+      "stock": 1,
+      "available": true
+    },
+    {
+      "id": "4",
+      "year": 2025,
+      "collection": "Spring - Summer",
+      "model": "Rebecca",
+      "description": {
+        "typeColor": "Tricolor",
+        "colors": [
+          "Orange",
+          "Medium Sea Green",
+          "Fuxia"
+        ],
+        "type": "Quilted",
+        "dimension": "Medium",
+        "dimensionCm": "27 x 20 x 5",
+        "embroidery": "Fish bone",
+        "yarnType": "Cotton",
+        "buckle": true,
+        "closure": "Swivel",
+        "lining": true,
+        "handles": {
+          "type": "Shoulder bag",
+          "material": "Chain",
+          "color": "Silver",
+          "length": "Medium",
+          "rings": "Medium"
+        }
+      },
+      "price": 70,
+      "image": "https://raw.githubusercontent.com/AlessiaMonasteri/Computer-Engineering-and-AI-Anno2-Semestre1/main/images/Rebecca.jpeg",
+      "stock": 1,
+      "available": true
+    },
+    {
+      "id": "5",
+      "year": 2025,
+      "collection": "Autumn - Winter",
+      "model": "Marina",
+      "description": {
+        "typeColor": "Monocolor",
+        "colors": [
+          "Petrol blue"
+        ],
+        "type": "Quilted",
+        "dimension": "Medium",
+        "dimensionCm": "",
+        "embroidery": "Diagonal Little Squares - Horizontal Fill",
+        "yarnType": "Cotton",
+        "buckle": true,
+        "closure": "Swivel/Magnetic closure",
+        "lining": true,
+        "handles": {
+          "type": "Shoulder bag",
+          "material": "Chain",
+          "color": "Silver",
+          "length": "Medium",
+          "rings": "Medium"
+        }
+      },
+      "price": 70,
+      "image": "https://raw.githubusercontent.com/AlessiaMonasteri/Computer-Engineering-and-AI-Anno2-Semestre1/main/images/Marina.jpeg",
+      "stock": 0,
+      "available": false
+    },
+    {
+      "id": "6",
+      "year": 2025,
+      "collection": "Autumn - Winter",
+      "model": "Valeria",
+      "description": {
+        "typeColor": "Tricolor",
+        "colors": [
+          "Bordeaux",
+          "Coffee",
+          "Orange"
+        ],
+        "type": "Quilted",
+        "dimension": "Medium",
+        "dimensionCm": "",
+        "embroidery": "Leaves",
+        "yarnType": "Cotton",
+        "buckle": true,
+        "closure": "Swivel/Magnetic closure",
+        "lining": true,
+        "handles": {
+          "type": "Shoulder bag",
+          "material": "Chain",
+          "color": "Gold",
+          "length": "Medium",
+          "rings": "Medium"
+        }
+      },
+      "price": 70,
+      "image": "https://raw.githubusercontent.com/AlessiaMonasteri/Computer-Engineering-and-AI-Anno2-Semestre1/main/images/Valeria.jpeg",
+      "stock": 0,
+      "available": false
+    },
+    {
+      "id": "7",
+      "year": 2025,
+      "collection": "Spring - Summer",
+      "model": "Valentina",
+      "description": {
+        "typeColor": "Monocolor",
+        "colors": [
+          "Baby Pink"
+        ],
+        "type": "Quilted",
+        "dimension": "Medium",
+        "dimensionCm": "",
+        "embroidery": "Medium Unilateral Fish Bone",
+        "yarnType": "Cotton",
+        "buckle": true,
+        "closure": "Swivel/Magnetic closure",
+        "lining": true,
+        "handles": {
+          "type": "Shoulder bag",
+          "material": "Chain",
+          "color": "Silver",
+          "length": "Medium",
+          "rings": "Medium"
+        }
+      },
+      "price": 70,
+      "image": "https://raw.githubusercontent.com/AlessiaMonasteri/Computer-Engineering-and-AI-Anno2-Semestre1/main/images/Valentina.jpeg",
+      "stock": 0,
+      "available": false
+    },
+    {
+      "id": "8",
+      "year": 2025,
+      "collection": "Autumn - Winter",
+      "model": "Sabrina",
+      "description": {
+        "typeColor": "Bicolor",
+        "colors": [
+          "Coffee",
+          "Cream"
+        ],
+        "type": "Quilted",
+        "dimension": "Medium",
+        "dimensionCm": "",
+        "embroidery": "Triangles",
+        "yarnType": "Cotton",
+        "buckle": true,
+        "closure": "Swivel/Magnetic closure",
+        "lining": true,
+        "handles": {
+          "type": "Shoulder bag",
+          "material": "Chain",
+          "color": "Gold",
+          "length": "Medium",
+          "rings": "Medium"
+        }
+      },
+      "price": 70,
+      "image": "https://raw.githubusercontent.com/AlessiaMonasteri/Computer-Engineering-and-AI-Anno2-Semestre1/main/images/Sabrina.jpeg",
+      "stock": 0,
+      "available": false
+    },
+    {
+      "id": "9",
+      "year": 2025,
+      "collection": "Autumn - Winter",
+      "model": "Astrid",
+      "description": {
+        "typeColor": "Bicolor",
+        "colors": [
+          "Antique Pink",
+          "White"
+        ],
+        "type": "Quilted",
+        "dimension": "Mini",
+        "dimensionCm": "19 x 15 x 4",
+        "embroidery": "Horizontal Stacks",
+        "yarnType": "Fur",
+        "buckle": false,
+        "closure": "Magnetic closure",
+        "lining": false,
+        "handles": {
+          "type": "Crossbody bag",
+          "material": "Chain",
+          "color": "Dark grey",
+          "length": "Long",
+          "rings": "Small"
+        }
+      },
+      "price": 50,
+      "image": "https://raw.githubusercontent.com/AlessiaMonasteri/Computer-Engineering-and-AI-Anno2-Semestre1/main/images/Astrid.jpeg",
+      "stock": 1,
+      "available": true
+    }
+  ],
+  "orders":[],
+  "contacts": [    
+    {
+      "id": "3b5a",
+      "userId": 3,
+      "userName": "Filippa Monasteri",
+      "userEmail": "filippa@test.com",
+      "message": "Ciao, quando ci sarà il re-stock della borsa Queen ?",
+      "createdAt": "2025-12-09T19:33:30.571Z"
+    },
+    {
+      "id": "99da",
+      "userId": 1,
+      "userName": "Test User",
+      "userEmail": "user@test.com",
+      "message": "Bella Applicazione !",
+      "createdAt": "2025-12-09T19:34:14.955Z"
+    },
+    {
+      "id": "cb66",
+      "userId": 3,
+      "userName": "Filippa Monasteri",
+      "userEmail": "filippa@test.com",
+      "message": "Ciao, potrei sapere i tempi di consegna per favore?\ngrazie buona giornata. filippa Monasteri",
+      "createdAt": "2025-12-22T14:14:09.599Z"
+    },
+    {
+      "id": "caf9",
+      "userId": 1,
+      "userName": "Test User",
+      "userEmail": "user@test.com",
+      "message": "Ho acquistato la borsa Alessia, fra quanto arriva ?",
+      "createdAt": "2026-01-07T13:09:50.156Z"
+    }
+  ]
+}
