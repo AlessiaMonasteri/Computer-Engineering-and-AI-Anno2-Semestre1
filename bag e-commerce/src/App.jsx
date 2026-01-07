@@ -10,6 +10,7 @@ import AdminOrdersPage from "./pages/Admin/AdminOrdersPage";
 import ContactUs from "./pages/ContactUs";
 import AdminStockPage from "./pages/Admin/AdminStockPage";
 import NotFound from "./pages/NotFound";
+import AdminNewProduct from "./pages/Admin/AdminNewProduct";
 
 function App() {
   const currentUser = useSelector((state) => state.user.currentUser);
@@ -98,8 +99,16 @@ function App() {
             }
           />
 
-          {/* --- IMPORTANTISSIMO --- */}
-          {/* SOLO il NotFound NON deve avere redirect login */}
+          {/* ADMIN NEW PRODUCT */}
+          <Route
+            path="/admin/newproduct"
+            element={
+              currentUser?.role === "admin"
+                ? <AdminNewProduct />
+                : <Navigate to="/products" replace />
+            }
+          />
+          
           <Route path="*" element={<NotFound />} />
 
         </Routes>

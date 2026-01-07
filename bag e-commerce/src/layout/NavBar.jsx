@@ -39,6 +39,7 @@ const NavBar = () => {
         {currentUser?.role === "admin" && !hideLinks && (
           <>
             <NavLink to="/admin/orders">Orders</NavLink>
+            <NavLink to="/admin/newproduct">New product</NavLink>
             <NavLink to="/admin/stock">Restock</NavLink>
           </>
         )}

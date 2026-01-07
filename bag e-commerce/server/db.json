@@ -1,6 +1,6 @@
 {
   "products": [
-        {
+    {
       "id": "1",
       "year": 2025,
       "collection": "Autumn - Winter",
@@ -288,8 +288,8 @@
       "available": true
     }
   ],
-  "orders":[],
-  "contacts": [    
+  "orders": [],
+  "contacts": [
     {
       "id": "3b5a",
       "userId": 3,

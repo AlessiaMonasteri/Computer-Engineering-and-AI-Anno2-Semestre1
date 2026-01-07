@@ -363,6 +363,17 @@ h3{
   margin-right: 8px;
 }
 
+/**************************************** NEW PRODUCT PAGE ***************************************************/
+.create-success{
+  background: #e6fffa;
+  border: 1px solid #38b2ac;
+  color: #065f5b;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-align: center;
+}
+
 /**************************************** CONTACT US PAGES ***************************************************/
 
 .contact-container {
