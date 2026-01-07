@@ -27,7 +27,7 @@
         }
       },
       "price": 70,
-      "image": "https://raw.githubusercontent.com/AlessiaMonasteri/Computer-Engineering-and-AI-Anno2-Semestre1/main/images/Alessia.jpeg",
+      "image": "https://raw.githubusercontent.com/AlessiaMonasteri/Computer-Engineering-and-AI-Anno2-Semestre1/main/FRONT-END/images/Alessia.jpeg",
       "stock": 1,
       "available": true
     },
@@ -59,7 +59,7 @@
         }
       },
       "price": 70,
-      "image": "https://raw.githubusercontent.com/AlessiaMonasteri/Computer-Engineering-and-AI-Anno2-Semestre1/main/images/Olga.jpeg",
+      "image": "https://raw.githubusercontent.com/AlessiaMonasteri/Computer-Engineering-and-AI-Anno2-Semestre1/main/FRONT-END/images/Olga.jpeg",
       "stock": 1,
       "available": true
     },
@@ -91,7 +91,7 @@
         }
       },
       "price": 90,
-      "image": "https://raw.githubusercontent.com/AlessiaMonasteri/Computer-Engineering-and-AI-Anno2-Semestre1/main/images/Queen.jpeg",
+      "image": "https://raw.githubusercontent.com/AlessiaMonasteri/Computer-Engineering-and-AI-Anno2-Semestre1/main/FRONT-END/images/Queen.jpeg",
       "stock": 1,
       "available": true
     },
@@ -124,7 +124,7 @@
         }
       },
       "price": 70,
-      "image": "https://raw.githubusercontent.com/AlessiaMonasteri/Computer-Engineering-and-AI-Anno2-Semestre1/main/images/Rebecca.jpeg",
+      "image": "https://raw.githubusercontent.com/AlessiaMonasteri/Computer-Engineering-and-AI-Anno2-Semestre1/main/FRONT-END/images/Rebecca.jpeg",
       "stock": 1,
       "available": true
     },
@@ -155,7 +155,7 @@
         }
       },
       "price": 70,
-      "image": "https://raw.githubusercontent.com/AlessiaMonasteri/Computer-Engineering-and-AI-Anno2-Semestre1/main/images/Marina.jpeg",
+      "image": "https://raw.githubusercontent.com/AlessiaMonasteri/Computer-Engineering-and-AI-Anno2-Semestre1/main/FRONT-END/images/Marina.jpeg",
       "stock": 0,
       "available": false
     },
@@ -188,7 +188,7 @@
         }
       },
       "price": 70,
-      "image": "https://raw.githubusercontent.com/AlessiaMonasteri/Computer-Engineering-and-AI-Anno2-Semestre1/main/images/Valeria.jpeg",
+      "image": "https://raw.githubusercontent.com/AlessiaMonasteri/Computer-Engineering-and-AI-Anno2-Semestre1/main/FRONT-END/images/Valeria.jpeg",
       "stock": 0,
       "available": false
     },
@@ -219,7 +219,7 @@
         }
       },
       "price": 70,
-      "image": "https://raw.githubusercontent.com/AlessiaMonasteri/Computer-Engineering-and-AI-Anno2-Semestre1/main/images/Valentina.jpeg",
+      "image": "https://raw.githubusercontent.com/AlessiaMonasteri/Computer-Engineering-and-AI-Anno2-Semestre1/main/FRONT-END/images/Valentina.jpeg",
       "stock": 0,
       "available": false
     },
@@ -251,7 +251,7 @@
         }
       },
       "price": 70,
-      "image": "https://raw.githubusercontent.com/AlessiaMonasteri/Computer-Engineering-and-AI-Anno2-Semestre1/main/images/Sabrina.jpeg",
+      "image": "https://raw.githubusercontent.com/AlessiaMonasteri/Computer-Engineering-and-AI-Anno2-Semestre1/main/FRONT-END/images/Sabrina.jpeg",
       "stock": 0,
       "available": false
     },
@@ -283,7 +283,7 @@
         }
       },
       "price": 50,
-      "image": "https://raw.githubusercontent.com/AlessiaMonasteri/Computer-Engineering-and-AI-Anno2-Semestre1/main/images/Astrid.jpeg",
+      "image": "https://raw.githubusercontent.com/AlessiaMonasteri/Computer-Engineering-and-AI-Anno2-Semestre1/main/FRONT-END/images/Astrid.jpeg",
       "stock": 1,
       "available": true
     }
