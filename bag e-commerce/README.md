@@ -4,6 +4,7 @@ This application is an e-commerce web app developed in React that simulates an o
 The names of the bag models are inspired by the important women who surround the creator's life.
 The project's goal is to provide an example of an online shopping experience, distinguishing between user and admin roles, and applying fundamental front-end concepts,
 state management, routing, and data management.
+This project has mainly an educational purpose but can be a good starting point for a real e-commerce site.
 
 MAIN FEATURES:
 
@@ -53,7 +54,7 @@ Admin -> can read all user messages (designed for manual responses via an email 
 
 
 TO TEST THE FEATURES:
-Create a .env file in the root directory with the following structure:
+1. Create a .env file in the root directory with the following structure:
 
 VITE_USERS_JSON=
 [
@@ -72,6 +73,17 @@ VITE_USERS_JSON=
 
 Please note: The code must be written entirely on one line!
 
+2. TO START THE "BACK-END" (JSON SERVER)
+cd "bag e-commerce\server"
+npm install
+npm run dev
+
+3. TO START THE FRONT END
+cd "bag e-commerce"
+npm install
+npm run dev
+
+
 TECHNOLOGIES USED:
 
 React – UI and components
@@ -82,3 +94,16 @@ JavaScript
 CSS
 JSON Server
 Git & GitHub
+
+FUTURE IMPLEMENTATIONS:
+
+- Deleting products from the catalog
+- Deleting orders
+- Dashboard for tracking orders
+- Stock removal
+- Visual preview of the bag while filling out the new product creation page
+- In-app messaging tool
+- Implementation of a backend that integrates
+    -DB management
+    -Online payments
+    -Automatic email sending
