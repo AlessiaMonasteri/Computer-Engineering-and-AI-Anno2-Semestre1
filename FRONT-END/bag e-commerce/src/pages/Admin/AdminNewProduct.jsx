@@ -118,8 +118,7 @@ const expectedColorsCount = (typeColor) => {
     if (!form.collection.trim()) return "Collection is a mandatory field";
     if (!form.model.trim()) return "Model is a mandatory field";
     if (!String(form.price).trim()) return "Price is a mandatory field";
-    if (!form.type.trim()) return "Type is a mandatory field";
-    if (!form.color.trim()) return "Colors is a mandatory field";
+    if (!form.description.type.trim()) return "Type is a mandatory field";
 
     // Controlli numerici
     const yearNum = Number(form.year);
@@ -243,7 +242,7 @@ const expectedColorsCount = (typeColor) => {
                     onChange={(e) => setField("year", e.target.value)}
                     min={1900}
                     max={2100}
-                />
+                /> ❗
                 </td>
             </tr>
 
@@ -258,8 +257,8 @@ const expectedColorsCount = (typeColor) => {
                     {COLLECTIONS.map((c) => (
                     <option key={c} value={c}>{c}</option>
                     ))}
-                </select>
-                </td>
+                </select>❗
+                </td> 
             </tr>
 
             <tr>
@@ -269,7 +268,7 @@ const expectedColorsCount = (typeColor) => {
                     value={form.model}
                     onChange={(e) => setField("model", e.target.value)}
                     placeholder="Ex. Amelia"
-                />
+                /> ❗
                 </td>
             </tr>
 
@@ -291,8 +290,8 @@ const expectedColorsCount = (typeColor) => {
                     {TYPE_COLORS.map((v) => (
                     <option key={v} value={v}>{v}</option>
                     ))}
-                </select>
-                </td>
+                </select>❗
+                </td> 
             </tr>
 
             <tr>
@@ -302,7 +301,7 @@ const expectedColorsCount = (typeColor) => {
                     value={form.description.colors.join(", ")}
                     onChange={(e) => setColorsFromString(e.target.value)}
                     placeholder="Indigo, White"
-                />
+                /> ❗
                 <div style={{ fontSize: 12, opacity: 0.7 }}>
                     {form.description.typeColor === "Monocolor" && "Enter 1 color"}
                     {form.description.typeColor === "Bicolor" && "Enter 2 colors"}
@@ -322,7 +321,7 @@ const expectedColorsCount = (typeColor) => {
                     {BAG_TYPES.map((v) => (
                     <option key={v} value={v}>{v}</option>
                     ))}
-                </select>
+                </select>❗
                 </td>
             </tr>
 
@@ -500,7 +499,7 @@ const expectedColorsCount = (typeColor) => {
                     value={form.price}
                     onChange={(e) => setField("price", e.target.value)}
                     placeholder="Ex. 70"
-                />
+                /> ❗
                 </td>
             </tr>
 
@@ -511,7 +510,7 @@ const expectedColorsCount = (typeColor) => {
                     type="number"
                     value={form.stock}
                     onChange={(e) => setField("stock", e.target.value)}
-                />
+                /> ❗
                 </td>
             </tr>
 
@@ -522,7 +521,7 @@ const expectedColorsCount = (typeColor) => {
                     type="checkbox"
                     checked={form.available}
                     onChange={(e) => setField("available", e.target.checked)}
-                />
+                /> ❗
                 </td>
             </tr>
 
