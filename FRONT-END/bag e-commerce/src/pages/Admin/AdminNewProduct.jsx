@@ -2,27 +2,6 @@ import { useState } from "react";
 
 const API_URL = "http://localhost:3001/products";
 
-// Liste con scelte definite
-const COLLECTIONS = ["Autumn - Winter", "Spring - Summer"];
-
-const TYPE_COLORS = ["Monocolor", "Bicolor", "Tricolor", "Multicolor"];
-
-const BAG_TYPES = ["Quilted", "Tote", "Half-moon"];
-
-const DIMENSIONS = ["Mini", "Medium", "Large"];
-
-const YARN_TYPES = ["Cotton", "Fur", "Lanyard"];
-
-const CLOSURES = ["Zipper", "Swivel/Magnetic closure", "Swivel", "Magnetic closure"];
-
-const HANDLE_TYPES = ["Shoulder bag", "Hand bag", "Crossbody bag"];
-
-const HANDLE_MATERIALS = ["Chain", "Cotton", "Cotton & Chain"];
-
-const HANDLE_LENGTHS = ["Long", "Medium", "Small"];
-
-const HANDLE_RINGS = ["Small", "Medium", "Large"];
-
 const initialForm = {
   year: new Date().getFullYear(),
   collection: "",
@@ -52,65 +31,60 @@ const initialForm = {
   available: true
 };
 
+// Per aggiungere un nuovo prodotto al catalogo
 export default function AdminNewProduct() {
+  // Stato del form, inizializzato con initialForm (struttura vuota)
   const [form, setForm] = useState(initialForm);
+  // Stato per gestire loading, errore e messaggio di successo
   const [status, setStatus] = useState({ loading: false, error: "", ok: "" });
 
-  const setField = (name, value) => setForm((p) => ({ ...p, [name]: value }));
-
-  const setDescField = (name, value) =>
-    setForm((p) => ({
-      ...p,
-      description: { ...p.description, [name]: value }
-    }));
-
-  const setHandlesField = (name, value) =>
-    setForm((p) => ({
-      ...p,
-      description: {
-        ...p.description,
-        handles: { ...p.description.handles, [name]: value }
-      }
-    }));
-
-
+  // Converte una stringa "Indigo, White" in un array ["Indigo","White"] e lo salva in description.colors
   const setColorsFromString = (value) => {
     const colors = value
-      .split(",")
-      .map((c) => c.trim())
-      .filter(Boolean);
+        .split(",")
+        .map(c => c.trim())
+        .filter(Boolean);
 
-    setDescField("colors", colors);
-  };
+    setForm(prev => ({
+        ...prev,
+        description: {
+        ...prev.description,
+        colors
+        }
+    }));
+    };
 
   // Id incrementale leggendo max id da json-server
   const getNextProductId = async () => {
     const res = await fetch(API_URL);
-    if (!res.ok) throw new Error("Impossibile leggere /products");
+    if (!res.ok) throw new Error("Unable to read /products");
     const products = await res.json();
 
     if (!Array.isArray(products) || products.length === 0) return "1";
 
+    // Converto gli id in numeri
     const numericIds = products
       .map((p) => Number(p.id))
       .filter((n) => Number.isFinite(n));
 
+    // Trovo il maxId (se non ce ne sono, 0)
     const maxId = numericIds.length ? Math.max(...numericIds) : 0;
+    // Ritorno maxId+1 come stringa
     return String(maxId + 1);
   };
-
-const expectedColorsCount = (typeColor) => {
-    switch (typeColor) {
-        case "Monocolor":
-        return 1;
-        case "Bicolor":
-        return 2;
-        case "Tricolor":
-        return 3;
-        default:
-        return null;
-    }
-    };
+    // Numero di colori attesi
+    const expectedColorsCount = (typeColor) => {
+        switch (typeColor) {
+            case "Monocolor":
+            return 1;
+            case "Bicolor":
+            return 2;
+            case "Tricolor":
+            return 3;
+            default:
+            return null;
+        }
+        };
 
   const validate = () => {
     // Campi Obbligatori
@@ -121,48 +95,64 @@ const expectedColorsCount = (typeColor) => {
     if (!form.description.type.trim()) return "Type is a mandatory field";
 
     // Controlli numerici
+    // Anno
     const yearNum = Number(form.year);
     if (Number.isNaN(yearNum) || yearNum < 1900 || yearNum > 2100)
       return "Invalid Year";
 
+    // Prezzo
     const priceNum = Number(form.price);
     if (Number.isNaN(priceNum) || priceNum <= 0) return "Invalid Price";
 
+    // Stock
     const stockNum = Number(form.stock);
     if (Number.isNaN(stockNum) || stockNum < 0) return "Invalid Stock";
 
-    // Colori obbligatori e coerenza con typeColor
+    // Colors
+
+    // Coerenza con typeColor
     const colors = form.description.colors;
     const typeColor = form.description.typeColor;
 
+    // Colors obbligatorio
     if (!Array.isArray(colors) || colors.length === 0)
         return "Insert at least one color";
 
+    // Calcolo quanti colori sono richiesti per il typeColor selezionato
     const expected = expectedColorsCount(typeColor);
 
+    // Se expected non è null (quindi mono/bi/tri), la lunghezza deve combaciare
     if (expected !== null && colors.length !== expected) {
         return `${typeColor} requires exactly ${expected} color(s)`;
     }
+
+    // Closure
     // Se il tipo di chiusura è una zipper allora non posso inserire una fibbia
     if (form.description.closure === "Zipper" && form.description.buckle) {
         return "If the closure is a zipper there can't also be a buckle";
     }
-
+    // Fine validazione 
     return "";
   };
 
+  // Submit del form
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // Reset dei messaggi
     setStatus({ loading: false, error: "", ok: "" });
 
+    // Eseguo la validazione e se c'è un errore esco
     const err = validate();
     if (err) return setStatus({ loading: false, error: err, ok: "" });
 
+    // Loading true
     setStatus({ loading: true, error: "", ok: "" });
 
     try {
+      // Calcolo id incrementale leggendo max id
       const nextId = await getNextProductId();
 
+      // Preparazione Payload
       const payload = {
         id: nextId,
         year: Number(form.year),
@@ -193,22 +183,26 @@ const expectedColorsCount = (typeColor) => {
         available: Boolean(form.available)
       };
 
+      // POST
       const res = await fetch(API_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
       });
 
-      if (!res.ok) throw new Error(`Errore HTTP ${res.status}`);
+      if (!res.ok) throw new Error(`HTTP Error ${res.status}`);
 
+      // Messaggio successo con id creato
       setStatus({
         loading: false,
         error: "",
         ok: `Product Created (id: ${nextId})`
       });
+      // Reset del form ai valori iniziali
       setForm(initialForm);
     } catch (error) {
       console.error(error);
+      // Aggiornamento stato con messaggio d'errore
       setStatus({
         loading: false,
         error:
@@ -219,18 +213,16 @@ const expectedColorsCount = (typeColor) => {
   };
 
   return (
-    <div style={{ maxWidth: 900, margin: "0 auto", padding: "1.5rem" }}>
+    <div className = "new-product-container">
       <h2>Admin — New Product</h2>
 
       <form onSubmit={handleSubmit}>
-        <table style={{ width: "100%", borderCollapse: "collapse" }}>
+        <table className = "new-product-table">
             <tbody>
 
-            {/*BASE*/}
+            {/* BASE */}
             <tr>
-                <th colSpan="2" style={{ textAlign: "left", paddingTop: 16 }}>
-                Base
-                </th>
+                <th colSpan="2" className="new-product-titles">Base</th>
             </tr>
 
             <tr>
@@ -239,7 +231,8 @@ const expectedColorsCount = (typeColor) => {
                 <input
                     type="number"
                     value={form.year}
-                    onChange={(e) => setField("year", e.target.value)}
+                    //setForm aggiorna lo stato copiando tutto con lo Spread Operator
+                    onChange={(e) =>setForm(prev => ({...prev, description: {...prev.description, year: e.target.value}}))}
                     min={1900}
                     max={2100}
                 /> ❗
@@ -249,15 +242,13 @@ const expectedColorsCount = (typeColor) => {
             <tr>
                 <td>Collection</td>
                 <td>
-                <select
+                    <select 
                     value={form.collection}
-                    onChange={(e) => setField("collection", e.target.value)}
-                >
-                    <option value="">-- Select --</option>
-                    {COLLECTIONS.map((c) => (
-                    <option key={c} value={c}>{c}</option>
-                    ))}
-                </select>❗
+                    // React passa l’evento onChange alla funzione
+                    onChange={(e) =>setForm(prev => ({...prev, description: {...prev.description, model: e.target.value}}))}>
+                    <option>Autumn - Winter</option>
+                    <option>Spring - Summer</option>
+                    </select>❗
                 </td> 
             </tr>
 
@@ -266,31 +257,27 @@ const expectedColorsCount = (typeColor) => {
                 <td>
                 <input
                     value={form.model}
-                    onChange={(e) => setField("model", e.target.value)}
+                    onChange={(e) =>setForm(prev => ({...prev, description: {...prev.description, model: e.target.value}}))}
                     placeholder="Ex. Amelia"
                 /> ❗
                 </td>
             </tr>
 
-            {/*DESCRIPTION*/}
+            {/* DESCRIPTION */}
             <tr>
-                <th colSpan="2" style={{ textAlign: "left", paddingTop: 24 }}>
-                Description
-                </th>
+                <th colSpan="2" className="new-product-titles">Description</th>
             </tr>
 
             <tr>
                 <td>Color Type</td>
                 <td>
-                <select
+                    <select
                     value={form.description.typeColor}
-                    onChange={(e) => setDescField("typeColor", e.target.value)}
-                >
-                    <option value="">-- Select --</option>
-                    {TYPE_COLORS.map((v) => (
-                    <option key={v} value={v}>{v}</option>
-                    ))}
-                </select>❗
+                    onChange={(e) =>setForm(prev => ({...prev, description: {...prev.description, typeColor: e.target.value}}))}>
+                    <option value="Monocolor">Monocolor</option>
+                    <option value="Bicolor">Bicolor</option>
+                    <option value="Tricolor">Tricolor</option>
+                    </select>❗
                 </td> 
             </tr>
 
@@ -302,11 +289,9 @@ const expectedColorsCount = (typeColor) => {
                     onChange={(e) => setColorsFromString(e.target.value)}
                     placeholder="Indigo, White"
                 /> ❗
-                <div style={{ fontSize: 12, opacity: 0.7 }}>
                     {form.description.typeColor === "Monocolor" && "Enter 1 color"}
                     {form.description.typeColor === "Bicolor" && "Enter 2 colors"}
                     {form.description.typeColor === "Tricolor" && "Enter 3 colors"}
-                </div>
                 </td>
             </tr>
 
@@ -314,14 +299,13 @@ const expectedColorsCount = (typeColor) => {
                 <td>Type</td>
                 <td>
                 <select
-                    value={form.description.type}
-                    onChange={(e) => setDescField("type", e.target.value)}
-                >
-                    <option value="">-- Select --</option>
-                    {BAG_TYPES.map((v) => (
-                    <option key={v} value={v}>{v}</option>
-                    ))}
-                </select>❗
+                    value={form.description.typeColor}
+                    onChange={(e) =>setForm(prev => ({...prev, description: {...prev.description, typeColor: e.target.value}
+                    }))}>
+                    <option value="Quilted">Quilted</option>
+                    <option value="Tote">Tote</option>
+                    <option value="Half-moon">Half-moon</option>
+                    </select>❗
                 </td>
             </tr>
 
@@ -330,13 +314,12 @@ const expectedColorsCount = (typeColor) => {
                 <td>
                 <select
                     value={form.description.dimension}
-                    onChange={(e) => setDescField("dimension", e.target.value)}
-                >
-                    <option value="">-- Select --</option>
-                    {DIMENSIONS.map((v) => (
-                    <option key={v} value={v}>{v}</option>
-                    ))}
-                </select>
+                    onChange={(e) =>setForm(prev => ({...prev, description: {...prev.description, dimension: e.target.value}
+                    }))}>
+                    <option value="Mini">Mini</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Large">Large</option>
+                    </select>
                 </td>
             </tr>
 
@@ -345,7 +328,7 @@ const expectedColorsCount = (typeColor) => {
                 <td>
                 <input
                     value={form.description.dimensionCm}
-                    onChange={(e) => setDescField("dimensionCm", e.target.value)}
+                    onChange={(e) => setForm(prev => ({...prev, description: {...prev.description, dimensionCm: e.target.value}}))}
                     placeholder="30 x 20 x 10"
                 />
                 </td>
@@ -354,46 +337,40 @@ const expectedColorsCount = (typeColor) => {
             <tr>
                 <td>Yarn type</td>
                 <td>
-                <select
+                    <select
                     value={form.description.yarnType}
-                    onChange={(e) => setDescField("yarnType", e.target.value)}
-                >
-                    <option value="">-- Select --</option>
-                    {YARN_TYPES.map((v) => (
-                    <option key={v} value={v}>{v}</option>
-                    ))}
-                </select>
+                    onChange={(e) => setForm(prev => ({...prev, description: {...prev.description, yarnType: e.target.value}}))}>
+                    <option value="Cotton">Cotton</option>
+                    <option value="Fur">Fur</option>
+                    <option value="Lanyard">Lanyard</option>
+                    </select>
                 </td>
             </tr>
 
             <tr>
                 <td>Closure</td>
                 <td>
-                <select
+                    <select
                     value={form.description.closure}
-                    onChange={(e) => {
-                    const value = e.target.value;
-                    setDescField("closure", value);
+                    onChange={(e) =>setForm(prev => ({...prev, description: {...prev.description, closure: e.target.value}}))}>
                     if (value === "Zipper") setDescField("buckle", false);
-                    }}
-                >
-                    <option value="">-- Select --</option>
-                    {CLOSURES.map((v) => (
-                    <option key={v} value={v}>{v}</option>
-                    ))}
-                </select>
+                    <option value="Zipper">Zipper</option>
+                    <option value="Swivel">Swivel</option>
+                    <option value="Swivel/Magnetic closure">Swivel/Magnetic closure</option>
+                    <option value="Magnetic closure">Magnetic closure</option>
+                    </select>
                 </td>
             </tr>
 
             <tr>
                 <td>Buckle</td>
                 <td>
-                <input
-                    type="checkbox"
-                    checked={form.description.buckle}
-                    disabled={form.description.closure === "Zipper"}
-                    onChange={(e) => setDescField("buckle", e.target.checked)}
-                />
+                    <input
+                        type="checkbox"
+                        checked={form.description.buckle}
+                        disabled={form.description.closure === "Zipper"}
+                        onChange={(e) =>setForm(prev => ({...prev, description: {...prev.description, buckle: e.target.checked}}))}
+                    />
                 </td>
             </tr>
 
@@ -403,27 +380,25 @@ const expectedColorsCount = (typeColor) => {
                     <input
                     type="checkbox"
                     checked={form.description.lining}
-                    onChange={(e) => setDescField("lining", e.target.checked)}
+                    onChange={(e) =>setForm(prev => ({...prev, description: {...prev.description, lining: e.target.checked}}))}
                     />
                 </td>
             </tr>
 
-            {/*HANDLES*/}
+            {/* HANDLES */}
             <tr>
-                <th colSpan="2" style={{ textAlign: "left", paddingTop: 24 }}>Handles</th>
+                <th colSpan="2" className="new-product-titles">Handles</th>
             </tr>
 
             <tr>
                 <td>Handles type</td>
                 <td>
                     <select
-                    value={form.description.handles.type}
-                    onChange={(e) => setHandlesField("type", e.target.value)}
-                    >
-                    <option value="">-- Select --</option>
-                    {HANDLE_TYPES.map((v) => (
-                        <option key={v} value={v}>{v}</option>
-                    ))}
+                    value={form.description.type}
+                    onChange={(e) =>setForm(prev => ({...prev, description: {...prev.description, type: e.target.value}}))}>
+                    <option value="Shoulder bag">Shoulder bag</option>
+                    <option value="Hand bag">Hand bag</option>
+                    <option value="Crossbody bag">Crossbody bag</option>
                     </select>
                 </td>
                 </tr>
@@ -432,13 +407,11 @@ const expectedColorsCount = (typeColor) => {
                 <td>Handles material</td>
                 <td>
                     <select
-                    value={form.description.handles.material}
-                    onChange={(e) => setHandlesField("material", e.target.value)}
-                    >
-                    <option value="">-- Select --</option>
-                    {HANDLE_MATERIALS.map((v) => (
-                        <option key={v} value={v}>{v}</option>
-                    ))}
+                    value={form.description.material}
+                    onChange={(e) =>setForm(prev => ({...prev, description: {...prev.description, material: e.target.value}}))}>
+                    <option value="Chain">Chain</option>
+                    <option value="Cotton">Cotton</option>
+                    <option value="Cotton & Chain">Cotton & Chain</option>
                     </select>
                 </td>
                 </tr>
@@ -448,8 +421,8 @@ const expectedColorsCount = (typeColor) => {
                 <td>
                     <input
                     value={form.description.handles.color}
-                    onChange={(e) => setHandlesField("color", e.target.value)}
-                    placeholder="Ex. Gold / Silver / Black & Silver"
+                    onChange={(e) =>setForm(prev => ({...prev, description: {...prev.description, color: e.target.value}}))}
+                    placeholder="Ex. Silver / Black & Silver"
                     />
                 </td>
                 </tr>
@@ -458,13 +431,11 @@ const expectedColorsCount = (typeColor) => {
                 <td>Handles length</td>
                 <td>
                     <select
-                    value={form.description.handles.length}
-                    onChange={(e) => setHandlesField("length", e.target.value)}
-                    >
-                    <option value="">-- Select --</option>
-                    {HANDLE_LENGTHS.map((v) => (
-                        <option key={v} value={v}>{v}</option>
-                    ))}
+                    value={form.description.length}
+                    onChange={(e) =>setForm(prev => ({...prev, description: {...prev.description, length: e.target.value}}))}>
+                    <option value="Long">Long</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Small">Small</option>
                     </select>
                 </td>
                 </tr>
@@ -473,44 +444,40 @@ const expectedColorsCount = (typeColor) => {
                 <td>Handles rings</td>
                 <td>
                     <select
-                    value={form.description.handles.rings}
-                    onChange={(e) => setHandlesField("rings", e.target.value)}
-                    >
-                    <option value="">-- Select --</option>
-                    {HANDLE_RINGS.map((v) => (
-                        <option key={v} value={v}>{v}</option>
-                    ))}
+                    value={form.description.rings}
+                    onChange={(e) =>setForm(prev => ({...prev, description: {...prev.description, rings: e.target.value}}))}>
+                    <option value="Large">Large</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Small">Small</option>
                     </select>
                 </td>
                 </tr>
 
 
-            {/* ================= COMMERCE ================= */}
+            {/* COMMERCE */}
             <tr>
-                <th colSpan="2" style={{ textAlign: "left", paddingTop: 24 }}>
-                Commerce
-                </th>
+                <th colSpan="2" className="new-product-titles">Commerce</th>
             </tr>
 
             <tr>
                 <td>Price</td>
                 <td>
-                <input
-                    value={form.price}
-                    onChange={(e) => setField("price", e.target.value)}
-                    placeholder="Ex. 70"
-                /> ❗
+                    <input
+                        value={form.price}
+                        onChange={(e) =>setForm(prev => ({...prev, description: {...prev.description, rings: e.target.value}}))}
+                        placeholder="Ex. 70"
+                    /> ❗
                 </td>
             </tr>
 
             <tr>
                 <td>Stock</td>
                 <td>
-                <input
-                    type="number"
-                    value={form.stock}
-                    onChange={(e) => setField("stock", e.target.value)}
-                /> ❗
+                    <input
+                        type="number"
+                        value={form.stock}
+                        onChange={(e) =>setForm(prev => ({...prev, description: {...prev.description, stock: e.target.value}}))}
+                    /> ❗
                 </td>
             </tr>
 
@@ -520,8 +487,8 @@ const expectedColorsCount = (typeColor) => {
                 <input
                     type="checkbox"
                     checked={form.available}
-                    onChange={(e) => setField("available", e.target.checked)}
-                /> ❗
+                    onChange={(e) =>setForm(prev => ({...prev, description: {...prev.description, available: e.target.checked}}))}
+                />❗
                 </td>
             </tr>
 
@@ -530,21 +497,21 @@ const expectedColorsCount = (typeColor) => {
                 <td>
                     <input
                     value={form.image}
-                    onChange={(e) => setField("image", e.target.value)}
+                    onChange={(e) =>setForm(prev => ({...prev, description: {...prev.description, image: e.target.checked}}))}
                     placeholder="https://raw.githubusercontent.com/..."
-                    style={{ width: "100%" }}
+                    className="new-product-URL"
                     />
                 </td>
             </tr>
 
 
-            {/*SUBMIT BUTTON*/}
+            {/* SUBMIT BUTTON */}
             <tr>
-                <td colSpan="2" style={{ paddingTop: 16 }}>
+                <td colSpan="2" className="new-product-submit-button">
                     <button
                     type="submit"
                     disabled={status.loading}
-                    style={{ width: "100%" }}
+                    className="new-product-submit-button"
                     >
                     {status.loading ? "Saving..." : "Create Product"}
                     </button>

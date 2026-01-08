@@ -20,7 +20,7 @@ const AdminOrdersPage = () => {
   // Utente attualmente loggato
   const currentUser = useSelector((state) => state.user.currentUser);
 
-    // Si attiva quando cambia currentUser; controlla se l’utente non esiste oppure non ha ruolo admin
+  // Si attiva quando cambia currentUser; controlla se l’utente non esiste oppure non ha ruolo admin
   useEffect(() => {
     if (!currentUser || currentUser.role !== "admin") {
       setError("Access denied: admin only.");

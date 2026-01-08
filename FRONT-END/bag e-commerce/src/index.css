@@ -374,6 +374,31 @@ h3{
   text-align: center;
 }
 
+.new-product-container{
+  max-width: 900;
+  margin: 0 auto;
+  padding: 1.5rem ;
+}
+
+.new-product-table{
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.new-product-submit-button{
+  width: 100%;
+  padding-top: 14px;
+}
+
+.new-product-URL{
+  width: 100%
+}
+
+.new-product-titles {
+  text-align: left;
+  padding-top: 24px;
+}
+
 /**************************************** CONTACT US PAGES ***************************************************/
 
 .contact-container {
@@ -490,6 +515,26 @@ h3{
 
 /*********************************** RESPONSIVE LAYOUT FOR MOBILE *************************************/
 @media (max-width: 900px) {
+  
+  body {
+    padding-top: 0 !important;
+  }
+
+  .page-layout {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .sidebar {
+    position: static;
+    width: 100%;
+    max-width: 320px;
+    margin: 1.2rem auto 1.5rem auto;
+  }
+
+  .products-area {
+    width: 100%;
+  }
 
   /**NAVBAR**/
   .navbar {
@@ -533,26 +578,5 @@ h3{
     position: static !important;
     top: auto;
     margin: 0.25rem 0 0.75rem;
-  }
-
-  /**GENERICS**/
-  body {
-    padding-top: 0 !important;
-  }
-
-  .page-layout {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .sidebar {
-    position: static;
-    width: 100%;
-    max-width: 320px;
-    margin: 1.2rem auto 1.5rem auto;
-  }
-
-  .products-area {
-    width: 100%;
   }
 }
