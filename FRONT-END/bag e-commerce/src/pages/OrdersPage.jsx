@@ -76,7 +76,7 @@ const OrdersPage = () => {
   if (error) {
     return (
       <div className="error">
-        Errore nel caricamento degli ordini: {error}
+        Error loading orders: {error}
       </div>
     );
   }
@@ -91,7 +91,7 @@ const OrdersPage = () => {
   }
 
   return (
-    <div>
+    <div className="orders-container">
       <h2>Your Orders</h2>
       {/* Tabella Ordini */}
       <table className="orderTable">

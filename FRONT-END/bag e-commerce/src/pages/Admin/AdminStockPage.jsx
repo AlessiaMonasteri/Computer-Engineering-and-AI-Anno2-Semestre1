@@ -132,7 +132,7 @@ const AdminStockPage = () => {
   };
 
   return (
-    <div>
+    <div className="stock-container">
       <h2>Admin - Stock management</h2>
 
       {/* Se c'è un errore nel caricamento prodotti, lo mostra */}

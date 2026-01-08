@@ -55,7 +55,7 @@ const ContactUs = () => {
   // Se l'utente è admin, mostra la lista di tutti i messaggi
   if (currentUser?.role === "admin") {
     return (
-      <div>
+      <div className="contact-container">
         <h2>Messages received</h2>
         {messages.length === 0 ? (
           <p className="info">No message received.</p>

@@ -18,7 +18,8 @@ function App() {
   const currentUser = useSelector((state) => state.user.currentUser);
 
   return (
-    <div id="app-container">
+    <div>
+    <div className="app-background">
       <NavBar />
 
       <div className="main-layout">
@@ -115,6 +116,7 @@ function App() {
 
         </Routes>
       </div>
+    </div>
     <Footer />
     </div>
   );
