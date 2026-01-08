@@ -62,7 +62,7 @@ function App() {
               !currentUser 
                 ? <Navigate to="/login" replace /> 
                 : currentUser.role === "admin"
-                  ? <Navigate to="/admin/orders" replace />     // <-- blocco admin
+                  ? <Navigate to="/admin/orders" replace />
                   : <Cart />
             }
           />
@@ -74,7 +74,7 @@ function App() {
               !currentUser
                 ? <Navigate to="/login" replace />
                 : currentUser.role === "admin"
-                  ? <Navigate to="/admin/orders" replace />     // <-- blocco admin
+                  ? <Navigate to="/admin/orders" replace />
                   : <OrdersPage />
             }
           />

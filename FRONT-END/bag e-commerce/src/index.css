@@ -31,7 +31,7 @@ body {
   padding: 20px;
 }
 
-/************************************************ PRODUCT CONTAINER *****************************************************/
+/************************************************ PRODUCT *****************************************************/
 .products-area {
   flex: 1;
   padding: 1.5rem;
@@ -40,7 +40,6 @@ body {
   gap: 1.5rem;
 }
 
-/************************************************* PRODUCT CARDS ********************************************************/
 .product-card {
   background-color: var(--card-bg);
   color: var(--text);
@@ -51,6 +50,22 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+/*Product Cards a fianco alla sidebar*/
+.page-layout {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+}
+
+/********************************************** SIDEBAR DEI FILTRI *************************************************/
+.sidebar {
+  width: 260px;
+  padding: 1rem;
+  position: sticky;
+  top: 80px;
+  align-self: flex-start;
 }
 
 /************************************************** LOGIN **********************************************************/
@@ -83,13 +98,6 @@ body {
 .login-label{
   text-align: right;
   padding-right: 2rem;
-}
-
-/*********************************** HOME LAYOUT: Product Cards alongside the sidebar *******************************************/
-.page-layout {
-  display: flex;
-  width: 100%;
-  min-height: 100vh;
 }
 
 /**************************************************** BUTTONS **********************************************************/
@@ -203,15 +211,6 @@ h3{
   margin-top: 15px;
 }
 
-/**************************************************** SIDEBAR **********************************************************/
-.sidebar {
-  width: 260px;
-  padding: 1rem;
-  position: sticky;
-  top: 80px;
-  align-self: flex-start;
-}
-
 /**************************************************** FILTERS **********************************************************/
 
 .filters-container {
@@ -316,7 +315,7 @@ h3{
   list-style-type: circle;
 }
 
-/**************************************** ORDER PAGES ********************************************/
+/**************************************** ORDERS PAGES ********************************************/
 .orderTable{
   width: 100%;
   border-collapse: collapse;
@@ -363,7 +362,7 @@ h3{
   margin-right: 8px;
 }
 
-/**************************************** NEW PRODUCT PAGE ***************************************************/
+/**************************************** ADMIN NEW PRODUCT PAGE ****************************************/
 .create-success{
   background: #e6fffa;
   border: 1px solid #38b2ac;
@@ -513,9 +512,18 @@ h3{
   opacity: 0.4;
 }
 
+/******************************************** PAGE NOT FOUND ******************************************/
+.page-not-found {
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 /*********************************** RESPONSIVE LAYOUT FOR MOBILE *************************************/
 @media (max-width: 900px) {
-  
+
   body {
     padding-top: 0 !important;
   }

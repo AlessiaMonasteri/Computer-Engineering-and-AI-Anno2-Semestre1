@@ -9,9 +9,7 @@ export const cartReducer = (state = initialState, action) => {
       const payloadId = String(action.payload.id);
 
       // Trova l'indice dell'elemento nel carrello con lo stesso id
-      // findIndex restituisce:
-      // - indice >= 0 se trovato
-      // - -1 se non trovato
+      // findIndex restituisce indice >= 0 se trovato o -1 se non trovato
       const index = state.items.findIndex(
         (item) => String(item.id) === payloadId
       );

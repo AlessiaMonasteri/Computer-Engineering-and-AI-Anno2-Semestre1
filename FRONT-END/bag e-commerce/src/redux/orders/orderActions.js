@@ -11,7 +11,7 @@ export const submitOrder = orderData => {
             })
             const data = await response.json()
             console.log("Order submitted successfully! ", data)
-            // Svuota il carrello SOLO dopo che l'ordine è stato salvato
+            // Svuota il carrello solo dopo che l'ordine è stato salvato
             dispatch(clearCart())
         }
         catch (error) {
