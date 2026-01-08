@@ -8,12 +8,12 @@ This project has mainly an educational purpose but can be a good starting point 
 
 MAIN FEATURES:
 
-- AUTHENTICATION AND ROLES
+- AUTHENTICATION AND ROLES  
     Role-based route protection:
     - User -> can fill the cart and place an order
     - Admin -> can manage product stock and orders
 
-- PRODUCT CATALOG
+- PRODUCT CATALOG  
 View bag list and product details with:
 image
 description
@@ -21,26 +21,26 @@ price
 availability
 Filters by category / search
 
-- CART
+- CART  
 Adding and removing products
 Increasing/decreasing quantities
 Automatic total calculation
 Resetting the cart after completing the order
 
-- ORDERS
+- ORDERS  
   Send order with date and summary
   View orders:
     - User -> can only view their own orders
     - Admin -> can view all orders
 
-- ADMIN AREA
+- ADMIN AREA  
 Restricted access
 Product stock management
 View orders for all users
 Access to the Orders and Restock pages
 Access to the Cart and My Orders pages is not required
 
-- CONTACT US
+- CONTACT US  
   One-way internal communication between users --> admins
      - User -> can send a message that can be viewed on the dedicated page by admin users
      - Admin -> can read all user messages (designed for manual responses via an email service)
