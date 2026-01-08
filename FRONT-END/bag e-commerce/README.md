@@ -9,11 +9,13 @@ This project has mainly an educational purpose but can be a good starting point 
 MAIN FEATURES:
 
 - AUTHENTICATION AND ROLES  
+
     Role-based route protection:
     - User -> can fill the cart and place an order
     - Admin -> can manage product stock and orders
 
 - PRODUCT CATALOG  
+
 View bag list and product details with:
 image
 description
@@ -22,18 +24,21 @@ availability
 Filters by category / search
 
 - CART  
+
 Adding and removing products
 Increasing/decreasing quantities
 Automatic total calculation
 Resetting the cart after completing the order
 
 - ORDERS  
+
   Send order with date and summary
   View orders:
     - User -> can only view their own orders
     - Admin -> can view all orders
 
 - ADMIN AREA  
+
 Restricted access
 Product stock management
 View orders for all users
@@ -41,6 +46,7 @@ Access to the Orders and Restock pages
 Access to the Cart and My Orders pages is not required
 
 - CONTACT US  
+
   One-way internal communication between users --> admins
      - User -> can send a message that can be viewed on the dedicated page by admin users
      - Admin -> can read all user messages (designed for manual responses via an email service)
@@ -78,6 +84,7 @@ Please note: The code must be written entirely on one line!
   - npm run dev
 
 TECHNOLOGIES USED:
+
   - React – UI and components
   - Redux – Global state management
   - React Router – Route navigation and protection
@@ -88,6 +95,7 @@ TECHNOLOGIES USED:
   - Git & GitHub
 
 FUTURE IMPLEMENTATIONS:
+
   - Deleting products from the catalog
   - Deleting orders
   - Dashboard for tracking orders
