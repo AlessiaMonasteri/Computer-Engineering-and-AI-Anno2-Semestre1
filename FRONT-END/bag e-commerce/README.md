@@ -10,9 +10,9 @@ MAIN FEATURES:
 
 - AUTHENTICATION AND ROLES
 
-Role-based route protection:
-User -> can fill the cart and place an order
-Admin -> can manage product stock and orders
+    Role-based route protection:
+    - User -> can fill the cart and place an order
+    - Admin -> can manage product stock and orders
 
 - PRODUCT CATALOG
 
@@ -35,8 +35,8 @@ Resetting the cart after completing the order
 Send order with date and summary
 
 View orders:
-User -> can only view their own orders
-Admin -> can view all orders
+    - User -> can only view their own orders
+    - Admin -> can view all orders
 
 - ADMIN AREA
 
@@ -49,11 +49,12 @@ Access to the Cart and My Orders pages is not required
 - CONTACT US
 
 One-way internal communication between users --> admins
-User -> can send a message that can be viewed on the dedicated page by admin users
-Admin -> can read all user messages (designed for manual responses via an email service)
+  - User -> can send a message that can be viewed on the dedicated page by admin users
+  - Admin -> can read all user messages (designed for manual responses via an email service)
 
 
 TO TEST THE FEATURES:
+
 1. Create a .env file in the root directory with the following structure:
 
 VITE_USERS_JSON=
@@ -74,36 +75,38 @@ VITE_USERS_JSON=
 Please note: The code must be written entirely on one line!
 
 2. TO START THE "BACK-END" (JSON SERVER)
-cd "bag e-commerce\server"
-npm install
-npm run dev
+
+  - cd "bag e-commerce\server"
+  - npm install
+  - npm run dev
 
 3. TO START THE FRONT END
-cd "bag e-commerce"
-npm install
-npm run dev
+
+  - cd "bag e-commerce"
+  - npm install
+  - npm run dev
 
 
-TECHNOLOGIES USED:
+- TECHNOLOGIES USED:
 
-React – UI and components
-Redux – Global state management
-React Router – Route navigation and protection
-Vite – Build tool and developer server
-JavaScript
-CSS
-JSON Server
-Git & GitHub
+  - React – UI and components
+  - Redux – Global state management
+  - React Router – Route navigation and protection
+  - Vite – Build tool and developer server
+  - JavaScript
+  - CSS
+  - JSON Server
+  - Git & GitHub
 
-FUTURE IMPLEMENTATIONS:
+- FUTURE IMPLEMENTATIONS:
 
-- Deleting products from the catalog
-- Deleting orders
-- Dashboard for tracking orders
-- Stock removal
-- Visual preview of the bag while filling out the new product creation page
-- In-app messaging tool
-- Implementation of a backend that integrates
-    -DB management
-    -Online payments
-    -Automatic email sending
+  - Deleting products from the catalog
+  - Deleting orders
+  - Dashboard for tracking orders
+  - Stock removal
+  - Visual preview of the bag while filling out the new product creation page
+  - In-app messaging tool
+  - Implementation of a backend that integrates
+    - DB management
+    - Online payments
+    - Automatic email sending
