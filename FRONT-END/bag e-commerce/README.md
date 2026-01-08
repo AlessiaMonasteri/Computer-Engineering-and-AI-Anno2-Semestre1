@@ -77,7 +77,7 @@ Please note: The code must be written entirely on one line!
   - npm install
   - npm run dev
 
-- TECHNOLOGIES USED:
+TECHNOLOGIES USED:
   - React – UI and components
   - Redux – Global state management
   - React Router – Route navigation and protection
@@ -87,7 +87,7 @@ Please note: The code must be written entirely on one line!
   - JSON Server
   - Git & GitHub
 
-- FUTURE IMPLEMENTATIONS:
+FUTURE IMPLEMENTATIONS:
   - Deleting products from the catalog
   - Deleting orders
   - Dashboard for tracking orders
