@@ -11,6 +11,8 @@ import ContactUs from "./pages/ContactUs";
 import AdminStockPage from "./pages/Admin/AdminStockPage";
 import NotFound from "./pages/NotFound";
 import AdminNewProduct from "./pages/Admin/AdminNewProduct";
+import Footer from "./layout/Footer";
+
 
 function App() {
   const currentUser = useSelector((state) => state.user.currentUser);
@@ -113,6 +115,7 @@ function App() {
 
         </Routes>
       </div>
+    <Footer />
     </div>
   );
 }
