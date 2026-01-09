@@ -72,6 +72,8 @@ VITE_USERS_JSON=
 ]
 
 Please note: The code must be written entirely on one line!
+Example:
+VITE_USERS_JSON=[{"id":1,"email":"user@test.com","password":"1234","name":"Test User","role":"user"},{"id":2,"email":"admin@test.com","password":"admin123","name":"Admin User","role":"admin"}]
 
 2. TO START THE "BACK-END" (JSON SERVER)
   - cd "bag e-commerce\server"
