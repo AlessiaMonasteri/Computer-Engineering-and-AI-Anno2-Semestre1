@@ -300,7 +300,7 @@
         "type": "Quilted",
         "dimension": "Medium",
         "dimensionCm": "",
-        "embroidery": "",
+        "embroidery": "Alternate Diagonal Stacks",
         "yarnType": "Lanyard",
         "buckle": true,
         "closure": "Swivel",
@@ -315,8 +315,8 @@
       },
       "price": 70,
       "image": "https://raw.githubusercontent.com/AlessiaMonasteri/Computer-Engineering-and-AI-Anno2-Semestre1/main/FRONT-END/images/Angela.jpeg",
-      "stock": 1,
-      "available": true
+      "stock": 0,
+      "available": false
     }
   ],
   "orders": [],

@@ -91,8 +91,8 @@ export default function AdminNewProduct() {
     if (!String(form.year).trim()) return "Year is a mandatory field";
     if (!form.collection.trim()) return "Collection is a mandatory field";
     if (!form.model.trim()) return "Model is a mandatory field";
-    if (!String(form.price).trim()) return "Price is a mandatory field";
     if (!form.description.type.trim()) return "Type is a mandatory field";
+    if (!String(form.price).trim()) return "Price is a mandatory field";    
 
     // Controlli numerici
     // Anno
@@ -339,6 +339,17 @@ export default function AdminNewProduct() {
             </tr>
 
             <tr>
+                <td>Embroidery</td>
+                <td>
+                    <input
+                    value={form.description.embroidery}
+                    onChange={(e) => setForm(prev => ({...prev, description: { ...prev.description, embroidery: e.target.value }}))}
+                    placeholder="Ex. Fish bone"
+                    />
+                </td>
+            </tr>
+
+            <tr>
                 <td>Yarn type</td>
                 <td>
                     <select
@@ -487,7 +498,7 @@ export default function AdminNewProduct() {
                 type="number"
                 value={form.stock}
                 onChange={(e) => setForm(prev => ({ ...prev, stock: e.target.value }))}
-                /> ❗
+                />
             </td>
             </tr>
 
@@ -498,7 +509,7 @@ export default function AdminNewProduct() {
                 type="checkbox"
                 checked={form.available}
                 onChange={(e) => setForm(prev => ({ ...prev, available: e.target.checked }))}
-                /> ❗
+                />
             </td>
             </tr>
 
