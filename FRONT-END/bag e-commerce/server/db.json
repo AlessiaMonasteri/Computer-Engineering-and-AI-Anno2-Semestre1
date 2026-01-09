@@ -286,6 +286,37 @@
       "image": "https://raw.githubusercontent.com/AlessiaMonasteri/Computer-Engineering-and-AI-Anno2-Semestre1/main/FRONT-END/images/Astrid.jpeg",
       "stock": 1,
       "available": true
+    },
+    {
+      "id": "10",
+      "year": 2026,
+      "collection": "Autumn - Winter",
+      "model": "Angela",
+      "description": {
+        "typeColor": "Monocolor",
+        "colors": [
+          "Wine"
+        ],
+        "type": "Quilted",
+        "dimension": "Medium",
+        "dimensionCm": "",
+        "embroidery": "",
+        "yarnType": "Lanyard",
+        "buckle": true,
+        "closure": "Swivel",
+        "lining": true,
+        "handles": {
+          "type": "Shoulder bag",
+          "material": "Chain",
+          "color": "Silver",
+          "length": "Medium",
+          "rings": "Medium"
+        }
+      },
+      "price": 70,
+      "image": "https://raw.githubusercontent.com/AlessiaMonasteri/Computer-Engineering-and-AI-Anno2-Semestre1/main/FRONT-END/images/Angela.jpeg",
+      "stock": 1,
+      "available": true
     }
   ],
   "orders": [],

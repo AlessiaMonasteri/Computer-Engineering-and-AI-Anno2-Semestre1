@@ -232,7 +232,7 @@ export default function AdminNewProduct() {
                     type="number"
                     value={form.year}
                     //setForm aggiorna lo stato copiando tutto con lo Spread Operator
-                    onChange={(e) =>setForm(prev => ({...prev, description: {...prev.description, year: e.target.value}}))}
+                    onChange={(e) => setForm(prev => ({...prev, year: e.target.value}))}
                     min={1900}
                     max={2100}
                 /> ❗
@@ -245,9 +245,10 @@ export default function AdminNewProduct() {
                     <select 
                     value={form.collection}
                     // React passa l’evento onChange alla funzione
-                    onChange={(e) =>setForm(prev => ({...prev, description: {...prev.description, model: e.target.value}}))}>
-                    <option>Autumn - Winter</option>
-                    <option>Spring - Summer</option>
+                    onChange={(e) => setForm(prev => ({ ...prev, collection: e.target.value }))}>
+                    <option value="">-- Select --</option>
+                    <option value="Autumn - Winter">Autumn - Winter</option>
+                    <option value="Spring - Summer">Spring - Summer</option>
                     </select>❗
                 </td> 
             </tr>
@@ -257,7 +258,7 @@ export default function AdminNewProduct() {
                 <td>
                 <input
                     value={form.model}
-                    onChange={(e) =>setForm(prev => ({...prev, description: {...prev.description, model: e.target.value}}))}
+                    onChange={(e) => setForm(prev => ({ ...prev, model: e.target.value }))}
                     placeholder="Ex. Amelia"
                 /> ❗
                 </td>
@@ -274,6 +275,7 @@ export default function AdminNewProduct() {
                     <select
                     value={form.description.typeColor}
                     onChange={(e) =>setForm(prev => ({...prev, description: {...prev.description, typeColor: e.target.value}}))}>
+                    <option value="">-- Select --</option>
                     <option value="Monocolor">Monocolor</option>
                     <option value="Bicolor">Bicolor</option>
                     <option value="Tricolor">Tricolor</option>
@@ -299,9 +301,10 @@ export default function AdminNewProduct() {
                 <td>Type</td>
                 <td>
                 <select
-                    value={form.description.typeColor}
-                    onChange={(e) =>setForm(prev => ({...prev, description: {...prev.description, typeColor: e.target.value}
+                    value={form.description.type}
+                    onChange={(e) =>setForm(prev => ({...prev, description: {...prev.description, type: e.target.value}
                     }))}>
+                    <option value="">-- Select --</option>
                     <option value="Quilted">Quilted</option>
                     <option value="Tote">Tote</option>
                     <option value="Half-moon">Half-moon</option>
@@ -316,6 +319,7 @@ export default function AdminNewProduct() {
                     value={form.description.dimension}
                     onChange={(e) =>setForm(prev => ({...prev, description: {...prev.description, dimension: e.target.value}
                     }))}>
+                    <option value="">-- Select --</option>
                     <option value="Mini">Mini</option>
                     <option value="Medium">Medium</option>
                     <option value="Large">Large</option>
@@ -340,6 +344,7 @@ export default function AdminNewProduct() {
                     <select
                     value={form.description.yarnType}
                     onChange={(e) => setForm(prev => ({...prev, description: {...prev.description, yarnType: e.target.value}}))}>
+                    <option value="">-- Select --</option>
                     <option value="Cotton">Cotton</option>
                     <option value="Fur">Fur</option>
                     <option value="Lanyard">Lanyard</option>
@@ -352,8 +357,8 @@ export default function AdminNewProduct() {
                 <td>
                     <select
                     value={form.description.closure}
-                    onChange={(e) =>setForm(prev => ({...prev, description: {...prev.description, closure: e.target.value}}))}>
-                    if (value === "Zipper") setDescField("buckle", false);
+                    onChange={(e) => {const value = e.target.value; setForm(prev => ({...prev, description: {...prev.description, closure: value, buckle: value === "Zipper" ? false : prev.description.buckle}}))}}>
+                    <option value="">-- Select --</option>
                     <option value="Zipper">Zipper</option>
                     <option value="Swivel">Swivel</option>
                     <option value="Swivel/Magnetic closure">Swivel/Magnetic closure</option>
@@ -394,8 +399,9 @@ export default function AdminNewProduct() {
                 <td>Handles type</td>
                 <td>
                     <select
-                    value={form.description.type}
-                    onChange={(e) =>setForm(prev => ({...prev, description: {...prev.description, type: e.target.value}}))}>
+                    value={form.description.handles.type}
+                    onChange={(e) => setForm(prev => ({...prev,description: {...prev.description,handles: { ...prev.description.handles, type: e.target.value }}}))}>
+                    <option value="">-- Select --</option>
                     <option value="Shoulder bag">Shoulder bag</option>
                     <option value="Hand bag">Hand bag</option>
                     <option value="Crossbody bag">Crossbody bag</option>
@@ -407,8 +413,9 @@ export default function AdminNewProduct() {
                 <td>Handles material</td>
                 <td>
                     <select
-                    value={form.description.material}
-                    onChange={(e) =>setForm(prev => ({...prev, description: {...prev.description, material: e.target.value}}))}>
+                    value={form.description.handles.material}
+                    onChange={(e) => setForm(prev => ({...prev,description: {...prev.description,handles: { ...prev.description.handles, material: e.target.value }}}))}>
+                    <option value="">-- Select --</option>
                     <option value="Chain">Chain</option>
                     <option value="Cotton">Cotton</option>
                     <option value="Cotton & Chain">Cotton & Chain</option>
@@ -421,7 +428,7 @@ export default function AdminNewProduct() {
                 <td>
                     <input
                     value={form.description.handles.color}
-                    onChange={(e) =>setForm(prev => ({...prev, description: {...prev.description, color: e.target.value}}))}
+                    onChange={(e) => setForm((prev) => ({...prev, description: {...prev.description, handles: {...prev.description.handles, color: e.target.value}}}))}
                     placeholder="Ex. Silver / Black & Silver"
                     />
                 </td>
@@ -431,8 +438,9 @@ export default function AdminNewProduct() {
                 <td>Handles length</td>
                 <td>
                     <select
-                    value={form.description.length}
-                    onChange={(e) =>setForm(prev => ({...prev, description: {...prev.description, length: e.target.value}}))}>
+                    value={form.description.handles.length}
+                    onChange={(e) => setForm(prev => ({...prev,description: {...prev.description,handles: { ...prev.description.handles, length: e.target.value }}}))}>
+                    <option value="">-- Select --</option>
                     <option value="Long">Long</option>
                     <option value="Medium">Medium</option>
                     <option value="Small">Small</option>
@@ -444,12 +452,14 @@ export default function AdminNewProduct() {
                 <td>Handles rings</td>
                 <td>
                     <select
-                    value={form.description.rings}
-                    onChange={(e) =>setForm(prev => ({...prev, description: {...prev.description, rings: e.target.value}}))}>
+                    value={form.description.handles.rings}
+                    onChange={(e) => setForm(prev => ({...prev,description: {...prev.description,handles: { ...prev.description.handles, rings: e.target.value }}}))}>
+                    <option value="">-- Select --</option>
                     <option value="Large">Large</option>
                     <option value="Medium">Medium</option>
                     <option value="Small">Small</option>
                     </select>
+
                 </td>
                 </tr>
 
@@ -460,50 +470,49 @@ export default function AdminNewProduct() {
             </tr>
 
             <tr>
-                <td>Price</td>
-                <td>
-                    <input
-                        value={form.price}
-                        onChange={(e) =>setForm(prev => ({...prev, description: {...prev.description, rings: e.target.value}}))}
-                        placeholder="Ex. 70"
-                    /> ❗
-                </td>
-            </tr>
-
-            <tr>
-                <td>Stock</td>
-                <td>
-                    <input
-                        type="number"
-                        value={form.stock}
-                        onChange={(e) =>setForm(prev => ({...prev, description: {...prev.description, stock: e.target.value}}))}
-                    /> ❗
-                </td>
-            </tr>
-
-            <tr>
-                <td>Available</td>
-                <td>
+            <td>Price (€)</td>
+            <td>
                 <input
-                    type="checkbox"
-                    checked={form.available}
-                    onChange={(e) =>setForm(prev => ({...prev, description: {...prev.description, available: e.target.checked}}))}
-                />❗
-                </td>
+                value={form.price}
+                onChange={(e) => setForm(prev => ({ ...prev, price: e.target.value }))}
+                placeholder="Ex. 70"
+                /> ❗
+            </td>
             </tr>
 
             <tr>
-                <td>Image (URL)</td>
-                <td>
-                    <input
-                    value={form.image}
-                    onChange={(e) =>setForm(prev => ({...prev, description: {...prev.description, image: e.target.checked}}))}
-                    placeholder="https://raw.githubusercontent.com/..."
-                    className="new-product-URL"
-                    />
-                </td>
+            <td>Stock</td>
+            <td>
+                <input
+                type="number"
+                value={form.stock}
+                onChange={(e) => setForm(prev => ({ ...prev, stock: e.target.value }))}
+                /> ❗
+            </td>
             </tr>
 
+            <tr>
+            <td>Available</td>
+            <td>
+                <input
+                type="checkbox"
+                checked={form.available}
+                onChange={(e) => setForm(prev => ({ ...prev, available: e.target.checked }))}
+                /> ❗
+            </td>
+            </tr>
+
+            <tr>
+            <td>Image (URL)</td>
+            <td>
+                <input
+                value={form.image}
+                onChange={(e) => setForm(prev => ({ ...prev, image: e.target.value }))}
+                placeholder="https://raw.githubusercontent.com/..."
+                className="new-product-URL"
+                />
+            </td>
+            </tr>
 
             {/* SUBMIT BUTTON */}
             <tr>
