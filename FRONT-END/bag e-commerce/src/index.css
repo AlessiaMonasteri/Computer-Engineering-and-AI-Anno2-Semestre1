@@ -376,6 +376,13 @@ h3{
 }
 
 /**************************************** ORDERS PAGES ********************************************/
+.admin-orders{
+  background: rgba(255, 255, 255, 0.7);
+  padding: 1.0rem;
+  border-radius: 12px;
+  color:#000000;
+}
+
 .orders-container{
   background: rgba(255, 255, 255, 0.7);
   padding: 1.0rem;

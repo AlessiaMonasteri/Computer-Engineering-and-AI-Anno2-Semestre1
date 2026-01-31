@@ -106,7 +106,7 @@ const AdminOrdersPage = () => {
   }
 
   return (
-    <div>
+    <div className="admin-orders">
       {/* Tabella con tutti gli ordini di tutti gli utenti*/}
       <h2>Admin - All orders</h2>
       <table className = "orderTable">
