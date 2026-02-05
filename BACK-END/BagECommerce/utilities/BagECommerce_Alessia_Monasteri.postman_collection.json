@@ -1,0 +1,3048 @@
+{
+  "info": {
+    "_postman_id": "8738ae5e-c402-42a0-bd12-6e5767e2ff1c",
+    "name": "BagECommerce_Alessia_Monasteri",
+    "description": "Updated Postman collection for BagECommerce with enum values aligned to your code.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "49992417",
+    "_collection_link": "https://go.postman.co/collection/49992417-8738ae5e-c402-42a0-bd12-6e5767e2ff1c?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "00 - Registrazione e autenticazione",
+      "item": [
+        {
+          "name": "USER + ADMIN + SUPERADMIN",
+          "item": [
+            {
+              "name": "Register USER",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Test\",\n  \"surname\": \"User\",\n  \"email\": \"test.user@example.com\",\n  \"password\": \"Password123!\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/register",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "register"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Login USER",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 200', () => pm.response.to.have.status(200));",
+                      "const json = pm.response.json();",
+                      "pm.expect(json).to.have.property('accessToken');",
+                      "pm.environment.set('token_user', json.accessToken);"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"test.user@example.com\",\n  \"password\": \"Password123!\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/login",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "login"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "GET ME",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAxNTI0ODEsImV4cCI6MTc3MDIzODg4MSwic3ViIjoiZGQ1ZTBiNDYtMGM0OS00NmY4LWE4YTItODRkODlmNTIxODBjIn0.y-4StkDlQxH2p38Lx5L-PPweDhFkrSjJNfVpxgJKrsw",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/users/me",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users",
+                    "me"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "UPDATE ME",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAxNTI0ODEsImV4cCI6MTc3MDIzODg4MSwic3ViIjoiZGQ1ZTBiNDYtMGM0OS00NmY4LWE4YTItODRkODlmNTIxODBjIn0.y-4StkDlQxH2p38Lx5L-PPweDhFkrSjJNfVpxgJKrsw",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"Alessia\",\r\n  \"surname\": \"Monasteri\",\r\n  \"email\": \"alessia.monasteri.updated@test.com\",\r\n  \"password\": \"NewPassword1\"\r\n}\r\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/users/me",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users",
+                    "me"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "ADMIN + SUPERADMIN",
+          "item": [
+            {
+              "name": "GET USERS",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAyMTI1ODksImV4cCI6MTc3MDI5ODk4OSwic3ViIjoiNWE2ZTEzZWYtNGYwZi00ZmI1LWE1ZWQtOGU2M2IwMjc5YzFmIn0.Q-vm98X1C-bDZhoX0ocRH8dimghYe48Xmk7Uga0Qtho",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/users/admin",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users",
+                    "admin"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "GET USERS BY ID",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAxNTgwMDgsImV4cCI6MTc3MDI0NDQwOCwic3ViIjoiNWE2ZTEzZWYtNGYwZi00ZmI1LWE1ZWQtOGU2M2IwMjc5YzFmIn0.0Hs9CHLSEZSoiPPrwzUvJc-z38tU6XnvAHPV32xtsLA",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/users/admin/98ea8768-3818-424b-ac85-1ea5b96b7781",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users",
+                    "admin",
+                    "98ea8768-3818-424b-ac85-1ea5b96b7781"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "GET USERS BY ROLE",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAxNTg4MzMsImV4cCI6MTc3MDI0NTIzMywic3ViIjoiNWE2ZTEzZWYtNGYwZi00ZmI1LWE1ZWQtOGU2M2IwMjc5YzFmIn0.YUbf7ZP53QGjh1OhWwqCAL4YMZiZfLwDUx2yL60LwvE",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/users/admin/by-role?role=USER",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users",
+                    "admin",
+                    "by-role"
+                  ],
+                  "query": [
+                    {
+                      "key": "role",
+                      "value": "USER"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Login ADMIN",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('Status is 200', () => pm.response.to.have.status(200));",
+                      "const json = pm.response.json();",
+                      "pm.expect(json).to.have.property('accessToken');",
+                      "pm.environment.set('token_user', json.accessToken);"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"test.user@example.com\",\n  \"password\": \"Password123!\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/login",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "login"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "SUPERADMIN",
+          "item": [
+            {
+              "name": "Update USER -> ADMIN",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAxNTMwNjgsImV4cCI6MTc3MDIzOTQ2OCwic3ViIjoiOThlYTg3NjgtMzgxOC00MjRiLWFjODUtMWVhNWI5NmI3NzgxIn0.r0cYzZ2R50xLir6AZXUbwCXEY7qijwMYDjRXl-j_RSs",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"role\": \"ADMIN\"\n}\n"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/users/superadmin/c9278ce1-6393-4e66-a5bf-1eeed774e3ec/role",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users",
+                    "superadmin",
+                    "c9278ce1-6393-4e66-a5bf-1eeed774e3ec",
+                    "role"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Login SUPERADMIN",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 200', () => pm.response.to.have.status(200));",
+                      "const json = pm.response.json();",
+                      "pm.environment.set('token_superadmin', json.accessToken);"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"superadmin@bagemcommerce.local\",\n  \"password\": \"Superadmin123\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/login",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "login"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "DELETE USER BY ID",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAxNTMwNjgsImV4cCI6MTc3MDIzOTQ2OCwic3ViIjoiOThlYTg3NjgtMzgxOC00MjRiLWFjODUtMWVhNWI5NmI3NzgxIn0.r0cYzZ2R50xLir6AZXUbwCXEY7qijwMYDjRXl-j_RSs",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"role\": \"ADMIN\"\n}\n"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/users/superadmin/c9278ce1-6393-4e66-a5bf-1eeed774e3ec",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users",
+                    "superadmin",
+                    "c9278ce1-6393-4e66-a5bf-1eeed774e3ec"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "01 - Products",
+      "item": [
+        {
+          "name": "USER + ADMIN + SUPERADMIN",
+          "item": [
+            {
+              "name": "GET ALL PRODUCTS",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAxMzY4MjQsImV4cCI6MTc3MDIyMzIyNCwic3ViIjoiOThlYTg3NjgtMzgxOC00MjRiLWFjODUtMWVhNWI5NmI3NzgxIn0.tREjLabMxViwzf2J8xh_i_lQm23_xzSQeOdv3Sd_EwU",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "url": {
+                  "raw": "http://localhost:3001/products",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3001",
+                  "path": [
+                    "products"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "GET PRODUCT BY ID",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAxMzY4MjQsImV4cCI6MTc3MDIyMzIyNCwic3ViIjoiOThlYTg3NjgtMzgxOC00MjRiLWFjODUtMWVhNWI5NmI3NzgxIn0.tREjLabMxViwzf2J8xh_i_lQm23_xzSQeOdv3Sd_EwU",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "url": {
+                  "raw": "http://localhost:3001/products/9802488c-b36e-4513-a770-19521f9828af",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3001",
+                  "path": [
+                    "products",
+                    "9802488c-b36e-4513-a770-19521f9828af"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "GET PRODUCT BY MODEL",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAwNTUwMTMsImV4cCI6MTc3MDE0MTQxMywic3ViIjoiNWE2ZTEzZWYtNGYwZi00ZmI1LWE1ZWQtOGU2M2IwMjc5YzFmIn0.bkWFdPWusH1qVGuLQRh4r_blWSa7SvUO5mdPnu_FBkY",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "url": {
+                  "raw": "http://localhost:3001/products/model/Queen",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3001",
+                  "path": [
+                    "products",
+                    "model",
+                    "Queen"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "GET PRODUCT BY AVAILABLE",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAyMTkwNDMsImV4cCI6MTc3MDMwNTQ0Mywic3ViIjoiNWE2ZTEzZWYtNGYwZi00ZmI1LWE1ZWQtOGU2M2IwMjc5YzFmIn0.hImmc-RpsXIAQInBGEaNKfDbYgmxzwPO6CoiWMEvn-c",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "url": {
+                  "raw": "http://localhost:3001/products/available",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3001",
+                  "path": [
+                    "products",
+                    "available"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "GET PRODUCT BY COLLECTION",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAxMzI1ODksImV4cCI6MTc3MDIxODk4OSwic3ViIjoiNWE2ZTEzZWYtNGYwZi00ZmI1LWE1ZWQtOGU2M2IwMjc5YzFmIn0.kNfQGXsEagUzQ4JZFBSqyWdFVDF9iK1dbQsKJn0XAVc",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "url": {
+                  "raw": "http://localhost:3001/products/by-collection?collection=Spring - Summer",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3001",
+                  "path": [
+                    "products",
+                    "by-collection"
+                  ],
+                  "query": [
+                    {
+                      "key": "collection",
+                      "value": "Spring - Summer"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "GET PRODUCT BY YEAR",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAwNTUwMTMsImV4cCI6MTc3MDE0MTQxMywic3ViIjoiNWE2ZTEzZWYtNGYwZi00ZmI1LWE1ZWQtOGU2M2IwMjc5YzFmIn0.bkWFdPWusH1qVGuLQRh4r_blWSa7SvUO5mdPnu_FBkY",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "url": {
+                  "raw": "http://localhost:3001/products/by-year?year=2025",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3001",
+                  "path": [
+                    "products",
+                    "by-year"
+                  ],
+                  "query": [
+                    {
+                      "key": "year",
+                      "value": "2025"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "GET BAGS",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAwNTUwMTMsImV4cCI6MTc3MDE0MTQxMywic3ViIjoiNWE2ZTEzZWYtNGYwZi00ZmI1LWE1ZWQtOGU2M2IwMjc5YzFmIn0.bkWFdPWusH1qVGuLQRh4r_blWSa7SvUO5mdPnu_FBkY",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "url": {
+                  "raw": "http://localhost:3001/products/bags",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3001",
+                  "path": [
+                    "products",
+                    "bags"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "GET ACCESSORIES",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAwNTUwMTMsImV4cCI6MTc3MDE0MTQxMywic3ViIjoiNWE2ZTEzZWYtNGYwZi00ZmI1LWE1ZWQtOGU2M2IwMjc5YzFmIn0.bkWFdPWusH1qVGuLQRh4r_blWSa7SvUO5mdPnu_FBkY",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3001/products/accessories",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3001",
+                  "path": [
+                    "products",
+                    "accessories"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "SEARCH PRODUCTS",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAwNTUwMTMsImV4cCI6MTc3MDE0MTQxMywic3ViIjoiNWE2ZTEzZWYtNGYwZi00ZmI1LWE1ZWQtOGU2M2IwMjc5YzFmIn0.bkWFdPWusH1qVGuLQRh4r_blWSa7SvUO5mdPnu_FBkY",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token_user}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/products/search?collection=Autumn - Winter",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "products",
+                    "search"
+                  ],
+                  "query": [
+                    {
+                      "key": "collection",
+                      "value": "Autumn - Winter"
+                    },
+                    {
+                      "key": "year",
+                      "value": "2020",
+                      "type": "text",
+                      "disabled": true
+                    },
+                    {
+                      "key": "available",
+                      "value": "false",
+                      "type": "text",
+                      "disabled": true
+                    },
+                    {
+                      "key": "minPrice",
+                      "value": "90",
+                      "type": "text",
+                      "disabled": true
+                    },
+                    {
+                      "key": "maxPrice",
+                      "value": "90",
+                      "type": "text",
+                      "disabled": true
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "ADMIN + SUPERADMIN",
+          "item": [
+            {
+              "name": "GET PRODUCT BY THRESHOLD",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAxMzY4MjQsImV4cCI6MTc3MDIyMzIyNCwic3ViIjoiOThlYTg3NjgtMzgxOC00MjRiLWFjODUtMWVhNWI5NmI3NzgxIn0.tREjLabMxViwzf2J8xh_i_lQm23_xzSQeOdv3Sd_EwU",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "url": {
+                  "raw": "http://localhost:3001/products/admin/low-stock?threshold=2",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3001",
+                  "path": [
+                    "products",
+                    "admin",
+                    "low-stock"
+                  ],
+                  "query": [
+                    {
+                      "key": "threshold",
+                      "value": "2"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "SUPERADMIN",
+          "item": [
+            {
+              "name": "UPDATE PRODUCT",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAyMTI2NDEsImV4cCI6MTc3MDI5OTA0MSwic3ViIjoiOThlYTg3NjgtMzgxOC00MjRiLWFjODUtMWVhNWI5NmI3NzgxIn0.uGyLjGCt1543nZTDw5UEc1Jc8t_tLh_cw54zXFBBSj0",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"unitPrice\": 19.99,\r\n  \"stock\": 40,\r\n  \"available\": true,\r\n  \"productImageURL\": \"https://example.com/updated.jpg\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3001/products/superadmin/14b758a6-500e-4bac-b101-1c055f95aedb",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3001",
+                  "path": [
+                    "products",
+                    "superadmin",
+                    "14b758a6-500e-4bac-b101-1c055f95aedb"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "DELETE PRODUCT",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAyMTI2NDEsImV4cCI6MTc3MDI5OTA0MSwic3ViIjoiOThlYTg3NjgtMzgxOC00MjRiLWFjODUtMWVhNWI5NmI3NzgxIn0.uGyLjGCt1543nZTDw5UEc1Jc8t_tLh_cw54zXFBBSj0",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "\r\n"
+                },
+                "url": {
+                  "raw": "http://localhost:3001/products/superadmin/70c8dd99-acc8-4a77-904e-fddcef870f42",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3001",
+                  "path": [
+                    "products",
+                    "superadmin",
+                    "70c8dd99-acc8-4a77-904e-fddcef870f42"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "02 - Stock Movements",
+      "item": [
+        {
+          "name": "ADMIN + SUPERADMIN",
+          "item": [
+            {
+              "name": "CREATE STOCK MOVEMENT Type=ADD",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAxMzg0MzMsImV4cCI6MTc3MDIyNDgzMywic3ViIjoiNWE2ZTEzZWYtNGYwZi00ZmI1LWE1ZWQtOGU2M2IwMjc5YzFmIn0.L_6xiQokft4ISbbWm-8LyLeBldG7KvOwxHXYuCbAkJc",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token_admin}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"productId\": \"9802488c-b36e-4513-a770-19521f9828af\",\n  \"type\": \"ADD\",\n  \"quantity\": 3\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/stock-movements/admin",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "stock-movements",
+                    "admin"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "CREATE STOCK MOVEMENT Type=REMOVE",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAxMzg0MzMsImV4cCI6MTc3MDIyNDgzMywic3ViIjoiNWE2ZTEzZWYtNGYwZi00ZmI1LWE1ZWQtOGU2M2IwMjc5YzFmIn0.L_6xiQokft4ISbbWm-8LyLeBldG7KvOwxHXYuCbAkJc",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token_admin}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"productId\": \"75576827-b7b5-4b46-aa3f-b43059fc6a08\",\n  \"type\": \"REMOVE\",\n  \"quantity\": 1\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/stock-movements/admin",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "stock-movements",
+                    "admin"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "STOCK MOVEMENTS BY TYPE=ADD",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAxMzY4MjQsImV4cCI6MTc3MDIyMzIyNCwic3ViIjoiOThlYTg3NjgtMzgxOC00MjRiLWFjODUtMWVhNWI5NmI3NzgxIn0.tREjLabMxViwzf2J8xh_i_lQm23_xzSQeOdv3Sd_EwU",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token_admin}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"productId\": \"9802488c-b36e-4513-a770-19521f9828af\",\n  \"type\": \"ADD\",\n  \"quantity\": 3\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/stock-movements/admin/by-type?type=ADD",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "stock-movements",
+                    "admin",
+                    "by-type"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "ADD"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "STOCK MOVEMENTS BY DATE",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAxMzY4MjQsImV4cCI6MTc3MDIyMzIyNCwic3ViIjoiOThlYTg3NjgtMzgxOC00MjRiLWFjODUtMWVhNWI5NmI3NzgxIn0.tREjLabMxViwzf2J8xh_i_lQm23_xzSQeOdv3Sd_EwU",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token_admin}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/stock-movements/admin/by-date?start=2025-01-01&end=2026-12-31",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "stock-movements",
+                    "admin",
+                    "by-date"
+                  ],
+                  "query": [
+                    {
+                      "key": "start",
+                      "value": "2025-01-01"
+                    },
+                    {
+                      "key": "end",
+                      "value": "2026-12-31"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "SUPERADMIN",
+          "item": [
+            {
+              "name": "STOCK MOVEMENTS PERFORMED BY ADMINS",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAxMzY4MjQsImV4cCI6MTc3MDIyMzIyNCwic3ViIjoiOThlYTg3NjgtMzgxOC00MjRiLWFjODUtMWVhNWI5NmI3NzgxIn0.tREjLabMxViwzf2J8xh_i_lQm23_xzSQeOdv3Sd_EwU",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token_admin}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/stock-movements/superadmin/performed-by-admins",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "stock-movements",
+                    "superadmin",
+                    "performed-by-admins"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "SOMMA PER PRODUCT E TYPE",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAxMzY4MjQsImV4cCI6MTc3MDIyMzIyNCwic3ViIjoiOThlYTg3NjgtMzgxOC00MjRiLWFjODUtMWVhNWI5NmI3NzgxIn0.tREjLabMxViwzf2J8xh_i_lQm23_xzSQeOdv3Sd_EwU",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token_admin}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/stock-movements/superadmin/products/9802488c-b36e-4513-a770-19521f9828af/sum?type=ADD",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "stock-movements",
+                    "superadmin",
+                    "products",
+                    "9802488c-b36e-4513-a770-19521f9828af",
+                    "sum"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "ADD"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "STORICO PER PRODOTTO",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAxMzY4MjQsImV4cCI6MTc3MDIyMzIyNCwic3ViIjoiOThlYTg3NjgtMzgxOC00MjRiLWFjODUtMWVhNWI5NmI3NzgxIn0.tREjLabMxViwzf2J8xh_i_lQm23_xzSQeOdv3Sd_EwU",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token_admin}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"productId\": \"9802488c-b36e-4513-a770-19521f9828af\",\n  \"type\": \"ADD\",\n  \"quantity\": 3\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/stock-movements/superadmin/product/9802488c-b36e-4513-a770-19521f9828af",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "stock-movements",
+                    "superadmin",
+                    "product",
+                    "9802488c-b36e-4513-a770-19521f9828af"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "03 - Contacts",
+      "item": [
+        {
+          "name": "USER + ADMIN + SUPERADMIN",
+          "item": [
+            {
+              "name": "CREATE MESSAGE",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAxMzg3NDEsImV4cCI6MTc3MDIyNTE0MSwic3ViIjoiZGQ1ZTBiNDYtMGM0OS00NmY4LWE4YTItODRkODlmNTIxODBjIn0.eO7Bmtf7jUQT7tsm9RYS9bHoLDmzOEALr9VO5IX9Fo4",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token_user}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"subject\": \"INFO\",\n  \"message\": \"Hello, I need some info about shipping times.\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/contacts/me",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "contacts",
+                    "me"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "SUPERADMIN",
+          "item": [
+            {
+              "name": "READ MESSAGES",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAxMzY4MjQsImV4cCI6MTc3MDIyMzIyNCwic3ViIjoiOThlYTg3NjgtMzgxOC00MjRiLWFjODUtMWVhNWI5NmI3NzgxIn0.tREjLabMxViwzf2J8xh_i_lQm23_xzSQeOdv3Sd_EwU",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token_user}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/contacts/superadmin",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "contacts",
+                    "superadmin"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "READ MESSAGE BY MESSAGE ID",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAxMzY4MjQsImV4cCI6MTc3MDIyMzIyNCwic3ViIjoiOThlYTg3NjgtMzgxOC00MjRiLWFjODUtMWVhNWI5NmI3NzgxIn0.tREjLabMxViwzf2J8xh_i_lQm23_xzSQeOdv3Sd_EwU",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token_user}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/contacts/superadmin/c8d2895e-32ba-4e5d-b263-3b13353bb53d",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "contacts",
+                    "superadmin",
+                    "c8d2895e-32ba-4e5d-b263-3b13353bb53d"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "READ MESSAGE BY USER",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAxMzY4MjQsImV4cCI6MTc3MDIyMzIyNCwic3ViIjoiOThlYTg3NjgtMzgxOC00MjRiLWFjODUtMWVhNWI5NmI3NzgxIn0.tREjLabMxViwzf2J8xh_i_lQm23_xzSQeOdv3Sd_EwU",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token_user}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/contacts/superadmin/by-user/dd5e0b46-0c49-46f8-a8a2-84d89f52180c",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "contacts",
+                    "superadmin",
+                    "by-user",
+                    "dd5e0b46-0c49-46f8-a8a2-84d89f52180c"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "READ MESSAGE BY SUBJECT",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAxMzkyMjYsImV4cCI6MTc3MDIyNTYyNiwic3ViIjoiOThlYTg3NjgtMzgxOC00MjRiLWFjODUtMWVhNWI5NmI3NzgxIn0.RS74FNLgwxifMcOxKl-QfpWJFpS7p5q_UwgVSD2c8hw",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token_user}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/contacts/superadmin/by-subject?subject=INFO",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "contacts",
+                    "superadmin",
+                    "by-subject"
+                  ],
+                  "query": [
+                    {
+                      "key": "subject",
+                      "value": "INFO"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "READ MESSAGE BY DATE",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAxMzkyMjYsImV4cCI6MTc3MDIyNTYyNiwic3ViIjoiOThlYTg3NjgtMzgxOC00MjRiLWFjODUtMWVhNWI5NmI3NzgxIn0.RS74FNLgwxifMcOxKl-QfpWJFpS7p5q_UwgVSD2c8hw",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token_user}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/contacts/superadmin/by-date?start=2025-01-01&end=2026-12-31",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "contacts",
+                    "superadmin",
+                    "by-date"
+                  ],
+                  "query": [
+                    {
+                      "key": "start",
+                      "value": "2025-01-01"
+                    },
+                    {
+                      "key": "end",
+                      "value": "2026-12-31"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "04 - Orders",
+      "item": [
+        {
+          "name": "USER + ADMIN + SUPERADMIN",
+          "item": [
+            {
+              "name": "CREATE ORDER",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAyMTkwNDMsImV4cCI6MTc3MDMwNTQ0Mywic3ViIjoiNWE2ZTEzZWYtNGYwZi00ZmI1LWE1ZWQtOGU2M2IwMjc5YzFmIn0.hImmc-RpsXIAQInBGEaNKfDbYgmxzwPO6CoiWMEvn-c",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token_user}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"items\": [\r\n    {\r\n      \"productId\": \"75576827-b7b5-4b46-aa3f-b43059fc6a08\",\r\n      \"quantity\": 1\r\n    }\r\n  ]\r\n}\r\n"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/orders/me",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "orders",
+                    "me"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "GET MY ORDERS",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAxNDMzNDQsImV4cCI6MTc3MDIyOTc0NCwic3ViIjoiZGQ1ZTBiNDYtMGM0OS00NmY4LWE4YTItODRkODlmNTIxODBjIn0.-scNSC8lrnnGQUZQoE9Ny5biiOq3H1weZ5SsQFAcXsc",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token_user}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "\r\n"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/orders/me",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "orders",
+                    "me"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "GET MY ORDERS BY ORDER ID",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAxNDMzNDQsImV4cCI6MTc3MDIyOTc0NCwic3ViIjoiZGQ1ZTBiNDYtMGM0OS00NmY4LWE4YTItODRkODlmNTIxODBjIn0.-scNSC8lrnnGQUZQoE9Ny5biiOq3H1weZ5SsQFAcXsc",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token_user}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "\r\n"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/orders/me/88b30057-f085-415c-b546-791cd31b9e74",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "orders",
+                    "me",
+                    "88b30057-f085-415c-b546-791cd31b9e74"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "ADMIN + SUPERADMIN",
+          "item": [
+            {
+              "name": "GET ORDERS BY ORDER ID",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAxMzkyMjYsImV4cCI6MTc3MDIyNTYyNiwic3ViIjoiOThlYTg3NjgtMzgxOC00MjRiLWFjODUtMWVhNWI5NmI3NzgxIn0.RS74FNLgwxifMcOxKl-QfpWJFpS7p5q_UwgVSD2c8hw",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token_user}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "\r\n"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/orders/admin/88b30057-f085-415c-b546-791cd31b9e74",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "orders",
+                    "admin",
+                    "88b30057-f085-415c-b546-791cd31b9e74"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "GET RECENT ORDERS",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAxMzkyMjYsImV4cCI6MTc3MDIyNTYyNiwic3ViIjoiOThlYTg3NjgtMzgxOC00MjRiLWFjODUtMWVhNWI5NmI3NzgxIn0.RS74FNLgwxifMcOxKl-QfpWJFpS7p5q_UwgVSD2c8hw",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token_user}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "\r\n"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/orders/admin/recent",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "orders",
+                    "admin",
+                    "recent"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "GET ORDERS BY DATETIME",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAxMzkyMjYsImV4cCI6MTc3MDIyNTYyNiwic3ViIjoiOThlYTg3NjgtMzgxOC00MjRiLWFjODUtMWVhNWI5NmI3NzgxIn0.RS74FNLgwxifMcOxKl-QfpWJFpS7p5q_UwgVSD2c8hw",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token_user}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "\r\n"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/orders/admin/by-date?start=2025-01-01T00:00:00&end=2026-12-31T23:59:59",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "orders",
+                    "admin",
+                    "by-date"
+                  ],
+                  "query": [
+                    {
+                      "key": "start",
+                      "value": "2025-01-01T00:00:00"
+                    },
+                    {
+                      "key": "end",
+                      "value": "2026-12-31T23:59:59"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "GET ORDERS COUNT",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAxMzkyMjYsImV4cCI6MTc3MDIyNTYyNiwic3ViIjoiOThlYTg3NjgtMzgxOC00MjRiLWFjODUtMWVhNWI5NmI3NzgxIn0.RS74FNLgwxifMcOxKl-QfpWJFpS7p5q_UwgVSD2c8hw",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token_user}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "\r\n"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/orders/admin/count?year=2026&month=2",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "orders",
+                    "admin",
+                    "count"
+                  ],
+                  "query": [
+                    {
+                      "key": "year",
+                      "value": "2026",
+                      "type": "text"
+                    },
+                    {
+                      "key": "month",
+                      "value": "2",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "05 - Order Items",
+      "item": [
+        {
+          "name": "USER + ADMIN + SUPERADMIN",
+          "item": [
+            {
+              "name": "MY ORDER ITEMS",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAxNDgzMDEsImV4cCI6MTc3MDIzNDcwMSwic3ViIjoiZGQ1ZTBiNDYtMGM0OS00NmY4LWE4YTItODRkODlmNTIxODBjIn0.uKN9qgOPCPegE2nsuOD58TXJZJYc9zeqGpFE2CMNi8Y",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/order-items/me/88b30057-f085-415c-b546-791cd31b9e74",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "order-items",
+                    "me",
+                    "88b30057-f085-415c-b546-791cd31b9e74"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "MY ORDER TOTAL",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAxNDgzMDEsImV4cCI6MTc3MDIzNDcwMSwic3ViIjoiZGQ1ZTBiNDYtMGM0OS00NmY4LWE4YTItODRkODlmNTIxODBjIn0.uKN9qgOPCPegE2nsuOD58TXJZJYc9zeqGpFE2CMNi8Y",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/order-items/me/88b30057-f085-415c-b546-791cd31b9e74/total",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "order-items",
+                    "me",
+                    "88b30057-f085-415c-b546-791cd31b9e74",
+                    "total"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "ADMIN + SUPERADMIN",
+          "item": [
+            {
+              "name": "ORDER TOTAL",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAxNDg2MjQsImV4cCI6MTc3MDIzNTAyNCwic3ViIjoiOThlYTg3NjgtMzgxOC00MjRiLWFjODUtMWVhNWI5NmI3NzgxIn0.kpwofRHD5-qMJzGP1rV7c5EgawkAmLcTDANZZ3UJVr8",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/order-items/admin/88b30057-f085-415c-b546-791cd31b9e74/total",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "order-items",
+                    "admin",
+                    "88b30057-f085-415c-b546-791cd31b9e74",
+                    "total"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "ORDER ITEMS",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAxNDg2MjQsImV4cCI6MTc3MDIzNTAyNCwic3ViIjoiOThlYTg3NjgtMzgxOC00MjRiLWFjODUtMWVhNWI5NmI3NzgxIn0.kpwofRHD5-qMJzGP1rV7c5EgawkAmLcTDANZZ3UJVr8",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/order-items/admin/88b30057-f085-415c-b546-791cd31b9e74/total",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "order-items",
+                    "admin",
+                    "88b30057-f085-415c-b546-791cd31b9e74",
+                    "total"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "06 - Media",
+      "item": [
+        {
+          "name": "ADMIN + SUPERADMIN",
+          "item": [
+            {
+              "name": "UPLOAD",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAyMTI1ODksImV4cCI6MTc3MDI5ODk4OSwic3ViIjoiNWE2ZTEzZWYtNGYwZi00ZmI1LWE1ZWQtOGU2M2IwMjc5YzFmIn0.Q-vm98X1C-bDZhoX0ocRH8dimghYe48Xmk7Uga0Qtho",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "file",
+                      "type": "file",
+                      "uuid": "c52f1d40-76dd-49cb-8367-3f5c7032f53c",
+                      "src": "/C:/Users/Utente/OneDrive/Desktop/Documenti/Epicode-Laurea/CORSI/Anno 2/Semestre 1/Front End/bag e-commerce UTILITIES/bags_photo/Queen.jpeg"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/media/admin/products/75576827-b7b5-4b46-aa3f-b43059fc6a08/image",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "media",
+                    "admin",
+                    "products",
+                    "75576827-b7b5-4b46-aa3f-b43059fc6a08",
+                    "image"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "07 - Cart",
+      "item": [
+        {
+          "name": "USER + ADMIN + SUPERADMIN",
+          "item": [
+            {
+              "name": "GET MY CART",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAxNDgzMDEsImV4cCI6MTc3MDIzNDcwMSwic3ViIjoiZGQ1ZTBiNDYtMGM0OS00NmY4LWE4YTItODRkODlmNTIxODBjIn0.uKN9qgOPCPegE2nsuOD58TXJZJYc9zeqGpFE2CMNi8Y",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/users/me/cart",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users",
+                    "me",
+                    "cart"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "ADD TO CART",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAxNDgzMDEsImV4cCI6MTc3MDIzNDcwMSwic3ViIjoiZGQ1ZTBiNDYtMGM0OS00NmY4LWE4YTItODRkODlmNTIxODBjIn0.uKN9qgOPCPegE2nsuOD58TXJZJYc9zeqGpFE2CMNi8Y",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"productId\": \"14b758a6-500e-4bac-b101-1c055f95aedb\",\n  \"quantity\": 2\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/users/me/cart",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users",
+                    "me",
+                    "cart"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "UPDATE QUANTITY",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAxNDgzMDEsImV4cCI6MTc3MDIzNDcwMSwic3ViIjoiZGQ1ZTBiNDYtMGM0OS00NmY4LWE4YTItODRkODlmNTIxODBjIn0.uKN9qgOPCPegE2nsuOD58TXJZJYc9zeqGpFE2CMNi8Y",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/users/me/cart/14b758a6-500e-4bac-b101-1c055f95aedb?quantity=3",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users",
+                    "me",
+                    "cart",
+                    "14b758a6-500e-4bac-b101-1c055f95aedb"
+                  ],
+                  "query": [
+                    {
+                      "key": "quantity",
+                      "value": "3"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "REMOVE ITEM",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAxNDgzMDEsImV4cCI6MTc3MDIzNDcwMSwic3ViIjoiZGQ1ZTBiNDYtMGM0OS00NmY4LWE4YTItODRkODlmNTIxODBjIn0.uKN9qgOPCPegE2nsuOD58TXJZJYc9zeqGpFE2CMNi8Y",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/users/me/cart/14b758a6-500e-4bac-b101-1c055f95aedb",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users",
+                    "me",
+                    "cart",
+                    "14b758a6-500e-4bac-b101-1c055f95aedb"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "CLEAR CART",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAxNDgzMDEsImV4cCI6MTc3MDIzNDcwMSwic3ViIjoiZGQ1ZTBiNDYtMGM0OS00NmY4LWE4YTItODRkODlmNTIxODBjIn0.uKN9qgOPCPegE2nsuOD58TXJZJYc9zeqGpFE2CMNi8Y",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/users/me/cart",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users",
+                    "me",
+                    "cart"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "08 - BagProducts",
+      "item": [
+        {
+          "name": "USER + ADMIN + SUPERADMIN",
+          "item": [
+            {
+              "name": "GET BAGS",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAxNTE3MjAsImV4cCI6MTc3MDIzODEyMCwic3ViIjoiZGQ1ZTBiNDYtMGM0OS00NmY4LWE4YTItODRkODlmNTIxODBjIn0.7T0HHAER8v8nwVay8tFarlactaLB87L8JxcSxNQDT8k",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/products/bags",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "products",
+                    "bags"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "GET AVAILABLE BAGS",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAxNTI0ODEsImV4cCI6MTc3MDIzODg4MSwic3ViIjoiZGQ1ZTBiNDYtMGM0OS00NmY4LWE4YTItODRkODlmNTIxODBjIn0.y-4StkDlQxH2p38Lx5L-PPweDhFkrSjJNfVpxgJKrsw",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/products/bags/available",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "products",
+                    "bags",
+                    "available"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "GET BAGS BY TYPE COLOR",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAxNTI0ODEsImV4cCI6MTc3MDIzODg4MSwic3ViIjoiZGQ1ZTBiNDYtMGM0OS00NmY4LWE4YTItODRkODlmNTIxODBjIn0.y-4StkDlQxH2p38Lx5L-PPweDhFkrSjJNfVpxgJKrsw",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/products/bags/by-color?typeColor=MONOCOLOR",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "products",
+                    "bags",
+                    "by-color"
+                  ],
+                  "query": [
+                    {
+                      "key": "typeColor",
+                      "value": "MONOCOLOR"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "GET BAGS BY DIMENSION",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAxNTI0ODEsImV4cCI6MTc3MDIzODg4MSwic3ViIjoiZGQ1ZTBiNDYtMGM0OS00NmY4LWE4YTItODRkODlmNTIxODBjIn0.y-4StkDlQxH2p38Lx5L-PPweDhFkrSjJNfVpxgJKrsw",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/products/bags/by-dimension?dimension=MEDIUM",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "products",
+                    "bags",
+                    "by-dimension"
+                  ],
+                  "query": [
+                    {
+                      "key": "dimension",
+                      "value": "MEDIUM"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "GET BAGS BY YARN",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAxNTI0ODEsImV4cCI6MTc3MDIzODg4MSwic3ViIjoiZGQ1ZTBiNDYtMGM0OS00NmY4LWE4YTItODRkODlmNTIxODBjIn0.y-4StkDlQxH2p38Lx5L-PPweDhFkrSjJNfVpxgJKrsw",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/products/bags/by-yarn?yarnType=COTTON",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "products",
+                    "bags",
+                    "by-yarn"
+                  ],
+                  "query": [
+                    {
+                      "key": "yarnType",
+                      "value": "COTTON"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "GET BAGS BY CLOSURE",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAxNTI0ODEsImV4cCI6MTc3MDIzODg4MSwic3ViIjoiZGQ1ZTBiNDYtMGM0OS00NmY4LWE4YTItODRkODlmNTIxODBjIn0.y-4StkDlQxH2p38Lx5L-PPweDhFkrSjJNfVpxgJKrsw",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/products/bags/by-closure?closure=ZIPPER",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "products",
+                    "bags",
+                    "by-closure"
+                  ],
+                  "query": [
+                    {
+                      "key": "closure",
+                      "value": "ZIPPER"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "GET BAGS BY HANDLE",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAxNTI0ODEsImV4cCI6MTc3MDIzODg4MSwic3ViIjoiZGQ1ZTBiNDYtMGM0OS00NmY4LWE4YTItODRkODlmNTIxODBjIn0.y-4StkDlQxH2p38Lx5L-PPweDhFkrSjJNfVpxgJKrsw",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/products/bags/by-handle?handleType=HAND_BAG",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "products",
+                    "bags",
+                    "by-handle"
+                  ],
+                  "query": [
+                    {
+                      "key": "handleType",
+                      "value": "HAND_BAG"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "ADMIN + SUPERADMIN",
+          "item": [
+            {
+              "name": "CREATE BAG \"AURORA\"",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAyMTI1ODksImV4cCI6MTc3MDI5ODk4OSwic3ViIjoiNWE2ZTEzZWYtNGYwZi00ZmI1LWE1ZWQtOGU2M2IwMjc5YzFmIn0.Q-vm98X1C-bDZhoX0ocRH8dimghYe48Xmk7Uga0Qtho",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"model\": \"Aurora\",\r\n  \"collection\": \"Spring Summer\",\r\n  \"year\": 2026,\r\n  \"unitPrice\": 189.99,\r\n  \"productImageURL\": \"https://example.com/bag.jpg\",\r\n  \"stock\": 10,\r\n  \"available\": true,\r\n\r\n  \"typeColor\": \"BICOLOR\",\r\n  \"color1\": \"Black\",\r\n  \"color2\": \"Beige\",\r\n  \"color3\": null,\r\n  \"dimension\": \"MEDIUM\",\r\n  \"lengthHeightDepth\": \"\",\r\n  \"embroidery\": \"Alternate Stacks\",\r\n  \"yarnType\": \"FUR\",\r\n  \"closure\": \"ZIPPER\",\r\n  \"buckle\": true,\r\n  \"lining\": true,\r\n  \"handleType\": \"SHOULDER_BAG\",\r\n  \"handleColor\": \"Black\",\r\n  \"handleLength\": \"MEDIUM\",\r\n  \"handleRing\": \"MEDIUM\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/products/bags/admin/create",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "products",
+                    "bags",
+                    "admin",
+                    "create"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "CREATE BAG \"QUEEN\"",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAyMTI1ODksImV4cCI6MTc3MDI5ODk4OSwic3ViIjoiNWE2ZTEzZWYtNGYwZi00ZmI1LWE1ZWQtOGU2M2IwMjc5YzFmIn0.Q-vm98X1C-bDZhoX0ocRH8dimghYe48Xmk7Uga0Qtho",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"model\": \"Queen\",\r\n  \"collection\": \"Autumn - Winter\",\r\n  \"year\": 2025,\r\n  \"unitPrice\": 90.0,\r\n  \"productImageURL\": \"https://raw.githubusercontent.com/AlessiaMonasteri/Computer-Engineering-and-AI-Anno2-Semestre1/main/FRONT-END/images/Queen.jpeg\",\r\n  \"stock\": 1,\r\n  \"available\": true,\r\n\r\n  \"typeColor\": \"BICOLOR\",\r\n  \"color1\": \"Black\",\r\n  \"color2\": \"Silver\",\r\n  \"color3\": null,\r\n\r\n  \"dimension\": \"LARGE\",\r\n  \"lengthHeightDepth\": \"\",\r\n\r\n  \"embroidery\": \"Medium Squares - Diagonal Fill\",\r\n  \"yarnType\": \"COTTON\",\r\n  \"closure\": \"ZIPPER\",\r\n  \"buckle\": false,\r\n  \"lining\": true,\r\n\r\n  \"handleType\": \"HAND_BAG\",\r\n  \"handleColor\": \"Black & Silver\",\r\n  \"handleLength\": \"SMALL\",\r\n  \"handleRing\": \"MEDIUM\"\r\n}\r\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/products/bags/admin/create",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "products",
+                    "bags",
+                    "admin",
+                    "create"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "SUPERADMIN",
+          "item": [
+            {
+              "name": "BAGS SOLD BY MODEL",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAxNTMwNjgsImV4cCI6MTc3MDIzOTQ2OCwic3ViIjoiOThlYTg3NjgtMzgxOC00MjRiLWFjODUtMWVhNWI5NmI3NzgxIn0.r0cYzZ2R50xLir6AZXUbwCXEY7qijwMYDjRXl-j_RSs",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/products/bags/superadmin/sold?model=BagAlessia",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "products",
+                    "bags",
+                    "superadmin",
+                    "sold"
+                  ],
+                  "query": [
+                    {
+                      "key": "model",
+                      "value": "BagAlessia"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "REVENUE BY MODEL",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAxNTMwNjgsImV4cCI6MTc3MDIzOTQ2OCwic3ViIjoiOThlYTg3NjgtMzgxOC00MjRiLWFjODUtMWVhNWI5NmI3NzgxIn0.r0cYzZ2R50xLir6AZXUbwCXEY7qijwMYDjRXl-j_RSs",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/products/bags/superadmin/revenue?model=BagAlessia",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "products",
+                    "bags",
+                    "superadmin",
+                    "revenue"
+                  ],
+                  "query": [
+                    {
+                      "key": "model",
+                      "value": "BagAlessia"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "09 - AccessoryProducts",
+      "item": [
+        {
+          "name": "USER + ADMIN + SUPERADMIN",
+          "item": [
+            {
+              "name": "GET ACCESSORIES",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAxNTE3MjAsImV4cCI6MTc3MDIzODEyMCwic3ViIjoiZGQ1ZTBiNDYtMGM0OS00NmY4LWE4YTItODRkODlmNTIxODBjIn0.7T0HHAER8v8nwVay8tFarlactaLB87L8JxcSxNQDT8k",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/products/accessories",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "products",
+                    "accessories"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "GET AVAILABLE ACCESSORIES",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAxNTI0ODEsImV4cCI6MTc3MDIzODg4MSwic3ViIjoiZGQ1ZTBiNDYtMGM0OS00NmY4LWE4YTItODRkODlmNTIxODBjIn0.y-4StkDlQxH2p38Lx5L-PPweDhFkrSjJNfVpxgJKrsw",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/products/accessories/available",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "products",
+                    "accessories",
+                    "available"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "GET ACCESSORIES BY TYPE",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAxNTI0ODEsImV4cCI6MTc3MDIzODg4MSwic3ViIjoiZGQ1ZTBiNDYtMGM0OS00NmY4LWE4YTItODRkODlmNTIxODBjIn0.y-4StkDlQxH2p38Lx5L-PPweDhFkrSjJNfVpxgJKrsw",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/products/accessories/by-type?accessoryType=CHARMS",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "products",
+                    "accessories",
+                    "by-type"
+                  ],
+                  "query": [
+                    {
+                      "key": "accessoryType",
+                      "value": "CHARMS"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "ADMIN + SUPERADMIN",
+          "item": [
+            {
+              "name": "CREATE NEW HANDLE(1)",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAyMTI1ODksImV4cCI6MTc3MDI5ODk4OSwic3ViIjoiNWE2ZTEzZWYtNGYwZi00ZmI1LWE1ZWQtOGU2M2IwMjc5YzFmIn0.Q-vm98X1C-bDZhoX0ocRH8dimghYe48Xmk7Uga0Qtho",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"model\": \"Luxury Handle\",\r\n  \"collection\": \"Autumn - Winter\",\r\n  \"year\": 2026,\r\n  \"unitPrice\": 49.90,\r\n  \"productImageURL\": \"https://example.com/handle.jpg\",\r\n  \"stock\": 25,\r\n  \"available\": true,\r\n\r\n  \"accessoryType\": \"HANDLES\",\r\n\r\n  \"charmModel\": null,\r\n  \"charmColor\": null,\r\n\r\n  \"handleLength\": \"MEDIUM\",\r\n  \"handleType\": \"SHOULDER_BAG\",\r\n  \"handleRing\": \"MEDIUM\",\r\n  \"handleColor\": \"Silver\"\r\n}\r\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/products/accessories/admin/create",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "products",
+                    "accessories",
+                    "admin",
+                    "create"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "CREATE NEW HANDLE(2)",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAwNTM0MDksImV4cCI6MTc3MDEzOTgwOSwic3ViIjoiNWE2ZTEzZWYtNGYwZi00ZmI1LWE1ZWQtOGU2M2IwMjc5YzFmIn0.KNPc87jl2DBQgMFzNvz7L8Xs3IG5TjOqaDy9pW39kk4",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"model\": \"HandlesGold\",\r\n  \"collection\": \"Spring - Summer\",\r\n  \"year\": 2025,\r\n  \"unitPrice\": 15.0,\r\n  \"productImageURL\": \"https://example.com/handles.jpg\",\r\n  \"stock\": 25,\r\n  \"available\": true,\r\n\r\n  \"accessoryType\": \"HANDLES\",\r\n  \"charmModel\": null,\r\n  \"charmColor\": null,\r\n\r\n  \"handleLength\": \"SMALL\",\r\n  \"handleType\": \"HAND_BAG\",\r\n  \"handleRing\": \"SMALL\",\r\n  \"handleColor\": \"Gold\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3001/products/accessories/admin/create",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3001",
+                  "path": [
+                    "products",
+                    "accessories",
+                    "admin",
+                    "create"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "CREATE NEW CHARM",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAwNTM0MDksImV4cCI6MTc3MDEzOTgwOSwic3ViIjoiNWE2ZTEzZWYtNGYwZi00ZmI1LWE1ZWQtOGU2M2IwMjc5YzFmIn0.KNPc87jl2DBQgMFzNvz7L8Xs3IG5TjOqaDy9pW39kk4",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"model\": \"CharmMoon\",\r\n  \"collection\": \"Spring - Summer\",\r\n  \"year\": 2025,\r\n  \"unitPrice\": 15.0,\r\n  \"productImageURL\": \"https://example.com/charm.jpg\",\r\n  \"stock\": 25,\r\n  \"available\": true,\r\n\r\n  \"accessoryType\": \"CHARMS\",\r\n  \"charmModel\": \"Star\",\r\n  \"charmColor\": \"Silver\",\r\n\r\n  \"handleLength\": null,\r\n  \"handleType\": null,\r\n  \"handleRing\": null,\r\n  \"handleColor\": null\r\n}\r\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/products/accessories/admin/create",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "products",
+                    "accessories",
+                    "admin",
+                    "create"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "SUPERADMIN",
+          "item": [
+            {
+              "name": "ACCESSORIES SOLD BY TYPE",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAyMTI2NDEsImV4cCI6MTc3MDI5OTA0MSwic3ViIjoiOThlYTg3NjgtMzgxOC00MjRiLWFjODUtMWVhNWI5NmI3NzgxIn0.uGyLjGCt1543nZTDw5UEc1Jc8t_tLh_cw54zXFBBSj0",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/products/accessories/superadmin/sold?accessoryType=CHARMS",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "products",
+                    "accessories",
+                    "superadmin",
+                    "sold"
+                  ],
+                  "query": [
+                    {
+                      "key": "accessoryType",
+                      "value": "CHARMS"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "REVENUE BY TYPE",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAyMTI2NDEsImV4cCI6MTc3MDI5OTA0MSwic3ViIjoiOThlYTg3NjgtMzgxOC00MjRiLWFjODUtMWVhNWI5NmI3NzgxIn0.uGyLjGCt1543nZTDw5UEc1Jc8t_tLh_cw54zXFBBSj0",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/products/accessories/superadmin/revenue?accessoryType=CHARMS",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "products",
+                    "accessories",
+                    "superadmin",
+                    "revenue"
+                  ],
+                  "query": [
+                    {
+                      "key": "accessoryType",
+                      "value": "CHARMS"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
