@@ -72,27 +72,17 @@ Il progetto usa spring.config.import=file:env.properties
 
 Creare un file env.properties nella root del progetto con questo contenuto:
 
-# POSTGRES
 PG_DB_NAME=bagecommerce
 PG_USERNAME=postgres
 PG_PASSWORD=your_password
-
-# CLOUDINARY
 CLOUDINARY_NAME=your_cloud_name
 CLOUDINARY_API_KEY=your_api_key
 CLOUDINARY_SECRET=your_secret
-
-# MAILGUN
 MAILGUN_DOMAIN=your_domain
 MAILGUN_APIKEY=your_api_key
 MAILGUN_SENDER=your_sender_email
-
 MAILGUN_TEST_RECEIVER=your_test_receiver_email
-
-# JWT
 JWT_SECRET=your_jwt_secret
-
-# DEFAULT SUPERADMIN
 app.seed.superadmin.email=your_superadmin_email
 app.seed.superadmin.password=your_superadmin_password
 app.seed.superadmin.name=your_superadmin_name
